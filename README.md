@@ -1,2 +1,5 @@
-# carrot-clicker
-A simple farming simulation game. Similar to Stardew Valley but it's also an idle game.
+# Carrot Clicker
+A relaxing and simplistic idle game built around farming.
+
+**Latest website release:** 
+<a href="https://evan-w-lee.github.io/carrot-clicker">evan-w-lee.github.io/carrot-clicker</a>
