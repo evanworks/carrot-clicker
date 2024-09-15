@@ -36,7 +36,6 @@ function grow(event, vegetable) {
 }
 
 function harvestReady(event) {
-  clearInterval(growing) // I COULD SEE THIS BEING A PROBLEM
 
   event.target.style.background = "url(res/img/soil-carrot-ready.png)";
 
@@ -62,14 +61,16 @@ function harvest(event, vegetable) {
   }
 }
 
-// UPDATE FUNCTION OH NO
+// MENUS
 
-function update() {
-  document.getElementById("carrotSeeds").innerHTML = carrotSeeds;
-  document.getElementById("carrots").innerHTML = carrots;
+function toggle(menuID) {
+  let menu = document.getElementById(menuID)
+  if (menu.style.display == "block") {
+    menu.style.display = "none";
+  } else {
+    menu.style.display = "block";
+  }
 }
-
-
 
 // DRAG STUFF
 
@@ -81,3 +82,9 @@ function allowDrop(event) {
   event.preventDefault();
 }
 
+// UPDATE FUNCTION OH NO
+
+function update() {
+  document.getElementById("carrotSeeds").innerHTML = carrotSeeds;
+  document.getElementById("carrots").innerHTML = carrots;
+}

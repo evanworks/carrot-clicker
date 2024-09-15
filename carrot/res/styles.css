@@ -14,11 +14,14 @@
   background: rgba(255, 255, 255, 0.75);
   border-radius: 5px;
 }
+#left {
+  width: 300px;
+}
 
 #time-menu {
   top: 15px;
   left: 15px;
-  width: 264px;
+  width: 174px;
   height: 59px;
 }
 
@@ -60,20 +63,43 @@
 }
 
 #money-menu {
-  position: relative;
+  position: fixed;
   float: right;
   height: 59px;
   width: 197px;
-  top: -50px;
-  left: -20px;
+  top: 23px;
+  left: 82%;
 }
 #money {
-  position:absolute;
+  position: absolute;
   margin-top: 10px;
   margin-left: 15px; 
   font-size: 28px;
   font-weight: 600;
   cursor: auto;
+}
+#inventory {
+  position: absolute;
+  margin-left: 15px;
+  margin-top: 25px;
+  height: calc(100vh - 130px);
+  width: 250px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+#toolbox {
+  top: -85px;
+  left: 200px;
+}
+#toolbox img {
+  cursor: pointer;
+}
+#toolbox img:hover {
+  content:url('img/toolbox-hover.png'); 
+}
+#toolbox:active {
+  transform: scale(0.99);
 }
 
 /* farm */
@@ -88,9 +114,11 @@
   background: #82C150;
 }
 .farmland {
+  z-index: 10;
   width: 350px;
   height: 350px;
 }
+
 .soil-block {
   display: inline-block;
   width: 50px;
@@ -101,9 +129,18 @@
   cursor: pointer;
   background-size: 50px 50px;
 }
+.soil-block:active {
+  filter: brightness(110%);
+  transform: scale(0.95)
+}
 .soil-block:hover .tooltip {
   visibility: visible;
 }
+.soil-block:active .tooltip {
+  filter: brightness(100%);
+  transform: scale(1.05);
+}
+
 .tooltip {
   visibility: hidden;
   width: 120px;
