@@ -25,12 +25,10 @@
       </div>
       <div class="wrapper" id="left">
         <div class="menu" id="inventory" style="display: none;">
-          <div class="droptarget">
-            <img src="res/img/carrot-seed.png" style="width: 50px; height: 50px; display: inline-block; "ondragstart="dragStart(event)" draggable="true" id="dragtarget">
+            <img src="res/img/carrot-seed.png" style="width: 50px; height: 50px; display: inline-block;" onclick="select('carrotSeeds')">
             <span id="carrotSeeds">25</span><br/><br/>
-          </div>
           <img src="res/img/carrot.png" style="width: 50px; height: 50px; display: inline-block">
-          <span id="carrots">0</span><p>drag the seed icon to plant</p>
+          <span id="carrots">0</span><p>select the seeds and click on the farm plots to plant</p>
         </div>
       </div>
       <div class="wrapper" id="right"></div>
@@ -38,31 +36,31 @@
       <div id="farm">
         <div class="farmland" style="margin-left: calc(60% - 300px); margin-top: calc(45% - 350px);">
           <div class="row">
-            <div class="droptarget soil-block" ondrop="plant(event)" ondragover="allowDrop(event)" onclick='grow(event, "carrot"); harvest(event, "carrot")'>
+            <div class="soil-block" onclick='plant(event); grow(event, "carrot"); harvest(event, "carrot")'>
               <span class="tooltip" onclick="event.stopPropagation();"><div style="opacity: 0%;">Carrot</div>
                 <div class="progressBar" style="display: none;"><div class="progress"></div></div>
                 <div style="display: none;">Click to harvest</div>
               </span>
             </div>
-            <div class="droptarget soil-block" ondrop="plant(event)" ondragover="allowDrop(event)" onclick='grow(event, "carrot"); harvest(event, "carrot")'>
+            <div class="soil-block" onclick='plant(event); grow(event, "carrot"); harvest(event, "carrot")'>
               <span class="tooltip" onclick="event.stopPropagation();"><div style="opacity: 0%;">Carrot</div>
                 <div class="progressBar" style="display: none;"><div class="progress"></div></div>
                 <div style="display: none;">Click to harvest</div>
               </span>
             </div>
-            <div class="droptarget soil-block" ondrop="plant(event)" ondragover="allowDrop(event)" onclick='grow(event, "carrot"); harvest(event, "carrot")'>
+            <div class="soil-block" onclick='plant(event); grow(event, "carrot"); harvest(event, "carrot")'>
               <span class="tooltip" onclick="event.stopPropagation();"><div style="opacity: 0%;">Carrot</div>
                 <div class="progressBar" style="display: none;"><div class="progress"></div></div>
                 <div style="display: none;">Click to harvest</div>
               </span>
             </div>
-            <div class="droptarget soil-block" ondrop="plant(event)" ondragover="allowDrop(event)" onclick='grow(event, "carrot"); harvest(event, "carrot")'>
+            <div class="soil-block" onclick='plant(event); grow(event, "carrot"); harvest(event, "carrot")'>
               <span class="tooltip" onclick="event.stopPropagation();"><div style="opacity: 0%;">Carrot</div>
                 <div class="progressBar" style="display: none;"><div class="progress"></div></div>
                 <div style="display: none;">Click to harvest</div>
               </span>
             </div>
-            <div class="droptarget soil-block" ondrop="plant(event)" ondragover="allowDrop(event)" onclick='grow(event, "carrot"); harvest(event, "carrot")'>
+            <div class="soil-block" onclick='plant(event); grow(event, "carrot"); harvest(event, "carrot")'>
               <span class="tooltip" onclick="event.stopPropagation();"><div style="opacity: 0%;">Carrot</div>
                 <div class="progressBar" style="display: none;"><div class="progress"></div></div>
                 <div style="display: none;">Click to harvest</div>

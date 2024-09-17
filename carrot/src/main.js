@@ -6,31 +6,37 @@ carrotSeeds = 25;
 
 carrotGrowthTime = 15;
 
-
+selectedItem = "cursor";
 
 setInterval(update, 100)
 
 // PLANTING & GROWING
 
 function plant(event) {
-  event.preventDefault();
-  event.target.style.background = "url(res/img/soil-carrot.png)";
-  carrotSeeds -= 1;
-  event.target.classList.add("planted")
-  event.target.childNodes[1].childNodes[2].style.display = "block"; // progress bar
-  event.target.childNodes[1].childNodes[0].style.opacity = "100%"; // vegetable name
-  event.target.childNodes[1].childNodes[4].style.display = "none"; // click to harvest
-  growing = setInterval( function() { grow(event, "carrot") }, 500)
+  if (!event.target.classList.contains("planted") && selectedItem == "carrotSeeds") {
+    event.preventDefault();
+    selectedItem = "cursor";
+    document.body.style.cursor = 'url("res/img/cursors/cursor.png"),auto';
+    event.target.style.background = "url(res/img/soil-carrot.png)";
+    carrotSeeds -= 1;
+    event.target.classList.add("planted")
+    event.target.childNodes[1].childNodes[2].style.display = "block"; // progress bar
+    event.target.childNodes[1].childNodes[0].style.opacity = "100%"; // vegetable name
+    event.target.childNodes[1].childNodes[4].style.display = "none"; // click to harvest
+    growing = setInterval( function() { grow(event, "carrot") }, 500)
+  }
 }
 
 function grow(event, vegetable) {
-  if (event.target.classList.contains("planted")) {
-    let modifier = 100 / window[vegetable+"GrowthTime"];
-    let barWidth = event.target.childNodes[1].childNodes[2].childNodes[0].offsetWidth;
-    if (barWidth < 96) {
-      event.target.childNodes[1].childNodes[2].childNodes[0].style.width = barWidth + modifier + "px";
-    } else {
-      harvestReady(event)
+  if (selectedItem == "cursor") {
+    if (event.target.classList.contains("planted")) {
+      let modifier = 100 / window[vegetable+"GrowthTime"];
+      let barWidth = event.target.childNodes[1].childNodes[2].childNodes[0].offsetWidth;
+      if (barWidth < 96) {
+        event.target.childNodes[1].childNodes[2].childNodes[0].style.width = barWidth + modifier + "px";
+      } else {
+        harvestReady(event)
+      }
     }
   }
 }
@@ -49,15 +55,17 @@ function harvestReady(event) {
 }
 
 function harvest(event, vegetable) {
-  if (event.target.classList.contains("ready")) {
+  if (selectedItem == "cursor") {
+    if (event.target.classList.contains("ready")) {
 
-    event.target.style.background = "#76552B";
-
-    event.target.classList.remove("ready");
-    event.target.childNodes[1].childNodes[4].style.display = "none"; // click to harvest
-
-    window[vegetable+"s"] += 1;
-    event.target.childNodes[1].childNodes[2].childNodes[0].style.width = "0px";
+      event.target.style.background = "#76552B";
+  
+      event.target.classList.remove("ready");
+      event.target.childNodes[1].childNodes[4].style.display = "none"; // click to harvest
+  
+      window[vegetable+"s"] += 1;
+      event.target.childNodes[1].childNodes[2].childNodes[0].style.width = "0px";
+    }
   }
 }
 
@@ -72,17 +80,14 @@ function toggle(menuID) {
   }
 }
 
-// DRAG STUFF
+// SELECT
 
-function dragStart(event) {
-  event.dataTransfer.effectAllowed = "copyMove";
-} 
-
-function allowDrop(event) {
-  event.preventDefault();
+function select(item) {
+  document.body.style.cursor = 'url("res/img/cursors/'+item+'-cursor.png"),auto';
+  selectedItem = item;
 }
 
-// UPDATE FUNCTION OH NO
+// UPDATE FUNCTION
 
 function update() {
   document.getElementById("carrotSeeds").innerHTML = carrotSeeds;

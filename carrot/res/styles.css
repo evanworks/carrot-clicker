@@ -3,7 +3,7 @@
 * {
   font-family: Inter, sans-serif;
 }
-
+body {cursor:url("img/cursors/cursor.png"),auto;}
 /* menus */
 .wrapper {
   position: relative;
@@ -32,7 +32,6 @@
   margin-top: 11px;
   font-size: 30px;
   margin-left: 10px;
-  cursor: auto;
 }
 
 #time-wheel {
@@ -76,7 +75,6 @@
   margin-left: 15px; 
   font-size: 28px;
   font-weight: 600;
-  cursor: auto;
 }
 #inventory {
   position: absolute;
@@ -92,9 +90,7 @@
   top: -85px;
   left: 200px;
 }
-#toolbox img {
-  cursor: pointer;
-}
+
 #toolbox img:hover {
   content:url('img/toolbox-hover.png'); 
 }
@@ -126,7 +122,6 @@
   margin-right: 10px;
   margin-bottom: 10px;
   background: #76552B;
-  cursor: pointer;
   background-size: 50px 50px;
 }
 .soil-block:active {
@@ -153,7 +148,6 @@
   margin-left: -34px;
   margin-top: -40px;
   user-select: none;
-  cursor: default;
   font-size: 12px;
 }
 
