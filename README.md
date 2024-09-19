@@ -7,5 +7,5 @@ A relaxing and simplistic idle farming game.
 ## Updates
 Currently in pre-alpha so older updates will not be logged.
 
-**9/17/24**
-Fixed ridiculous bugs, changed a core aspect of the game
+**9/18/24**
+:(
