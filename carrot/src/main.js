@@ -1,6 +1,7 @@
 let money = 0;
 
 carrots = 0;
+carrotPrice = 7;
 
 carrotSeeds = 25; 
 
@@ -69,14 +70,28 @@ function harvest(event, vegetable) {
   }
 }
 
+// SELLING
+
+function sell() {
+  //sell = document.getElementById("sell");
+  if (selectedItem == "carrot") {
+    if (carrots > 0) {
+      carrots--;
+      money += carrotPrice;
+    }
+  }
+}
+
 // MENUS
 
-function toggle(menuID) {
-  let menu = document.getElementById(menuID)
-  if (menu.style.display == "block") {
-    menu.style.display = "none";
-  } else {
-    menu.style.display = "block";
+function toggle(...menuIDs) {
+  for (let menuID of menuIDs) {
+    let menu = document.getElementById(menuID)
+    if (menu.style.display == "block") {
+      menu.style.display = "none";
+    } else {
+      menu.style.display = "block";
+    }
   }
 }
 
@@ -92,4 +107,5 @@ function select(item) {
 function update() {
   document.getElementById("carrotSeeds").innerHTML = carrotSeeds;
   document.getElementById("carrots").innerHTML = carrots;
+  document.getElementById("money").innerHTML = "$"+money.toFixed(2)
 }

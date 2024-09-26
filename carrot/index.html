@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <title>Carrot Clicker v0.0.0</title>
+    <title>Carrot Clicker</title>
     <link rel="stylesheet" href="res/styles.css">
     <link rel="icon" href="res/img/favicon.png">
     <script src="src/main.js"></script> 
@@ -16,7 +16,7 @@
             <div id="center"></div>
             <div id="hand"></div>
           </div>
-          <div class="wrapper" id="toolbox" onclick="toggle('inventory');">
+          <div class="wrapper" id="toolbox" onclick="toggle('inventory', 'sell');">
             <img src="res/img/toolbox.png" style="width: 50px; height: 50px;">
           </div>
         </div>
@@ -30,13 +30,19 @@
             <div id="carrotSeeds-wrapper">
             <img src="res/img/carrot-seed.png" style="width: 50px; height: 50px; display: inline-block;" onclick="select('carrotSeeds')">Carrot Seeds
             <span id="carrotSeeds">25</span></div>
-          <img src="res/img/carrot.png" style="width: 50px; height: 50px; display: inline-block">
+          <img src="res/img/carrot.png" style="width: 50px; height: 50px; display: inline-block" onclick="select('carrot')">
           <span id="carrots">0</span>
           <p>select the seeds and click on the farm plots to plant</p>
         </div>
       </div>
       <div class="wrapper" id="right"></div>
-      <div class="wrapper" id="bottom"></div>
+      <div class="wrapper" id="bottom">
+        <div class="menu" id="sell" onclick="sell()">
+          <center>
+          <div style="font-size: 24px; margin-right: 2px; margin-top: 28px;">SELL ITEMS</div>
+          </center>
+        </div>
+      </div>
       <div id="farm">
         <div class="farmland" style="margin-left: calc(60% - 300px); margin-top: calc(45% - 350px);">
           <div class="row">
