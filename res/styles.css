@@ -4,7 +4,6 @@
   font-family: Inter, sans-serif;
 }
 body {
-  cursor:url("img/cursors/cursor.png"),auto;
   user-select: none;
 }
 /* menus */
@@ -14,7 +13,7 @@ body {
 .menu {
   position: relative;
   border: 3.5px solid black;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 5px;
 }
 .header {
@@ -73,18 +72,27 @@ body {
 }
 #sell {
   position: fixed;
-  top: 85%;
-  left: 85%;
-  width: 169px;
-  height: 92px;
+  bottom: 11px;
+  right: 12px;
+  width: 75px;
+  z-index: 100;
+  /*width: 169px;
+  height: 92px;*/
 }
 #sell:hover {
-  transform: scale(1.01);
-  background: rgb(255, 255, 255);
+  transform: scale(0.8);
+  content: url('img/sell-hover.png');  
 }
 #sell:active {
-  background: rgba(255, 255, 255, 0.75);
-  transform: scale(1.05, 0.95)
+  transform: scale(0.85, 0.75)
+}
+#sell-menu {
+  position: fixed;
+  height: 70px;
+  width: 300px;
+  bottom: 10px;
+  right: 10px;
+  border-radius: 50px;
 }
 #money-menu {
   position: fixed;
@@ -110,6 +118,42 @@ body {
   padding-left: 10px;
   padding-top: 10px;
 }
+.amount {
+  color: white;
+  text-shadow: 2px 2px black;
+  position: relative;
+  left: -20px;
+  top: -5px;
+  font-size: 18px;
+  pointer-events: none;
+}
+.inventoryWrapper {
+  display: inline-block;
+  padding-right: -10px;
+}
+.inventoryWrapper:hover {
+  background: #fef3c0;
+}
+.inventoryImg {
+  width: 60px; 
+  height: 60px; 
+  display: inline-block;
+}
+
+#inventoryTooltip {
+  position: fixed;
+  pointer-events: none;
+  color: #fff;
+  padding: 6px 8px;
+  font-size: 14px;
+  z-index: 9999;
+  transform: translate(10px, 10px);
+  opacity: 0;
+  max-width: 200px;
+  border: 1px solid black;
+  background: rgba(255, 255, 255, 0.8);
+  color: black;
+}
 
 #toolbox {
   top: -85px;
@@ -132,7 +176,7 @@ body {
   z-index: -1;
   width: 100%;
   height: 100%;
-  background: #82C150;
+  background: #59c135;
 }
 .farmland {
   z-index: 10;
@@ -146,7 +190,7 @@ body {
   height: 50px;
   margin-right: 10px;
   margin-bottom: 10px;
-  background: #76552B;
+  background: #8e5252;
   background-size: 50px 50px;
 }
 .soil-block:active {
@@ -201,7 +245,7 @@ body {
   font-family: sans-serif;
   font-size: 20px;
 }
-@media only screen and (max-width: 1000px) {
+/*@media only screen and (max-width: 1000px) {
   body {
     background: brown;
   }
@@ -211,7 +255,7 @@ body {
   #mobile {
     display: block;
   }
-}
+}*/
 
 #nojs {
   position: absolute;

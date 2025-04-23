@@ -1,3 +1,105 @@
-<script>
-window.location.replace("https://evanworks.github.io/carrot-clicker/carrot");
-</script>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>Carrot Clicker</title>
+    <link rel="stylesheet" href="res/styles.css">
+    <link rel="icon" href="res/img/favicon.png">
+  </head>
+  <body>
+    <!--<div id="jackson">jackson</div><!-->
+    <div id="game">
+
+
+      <div class="wrapper" id="top">
+        <div class="menu" id="time-menu">
+          <span id="day">DAY 1</span>
+          <div id="time-wheel">
+            <div id="center"></div>
+            <div id="hand"></div>
+          </div>
+          <div class="wrapper" id="toolbox" onclick="toggle('inventory');">
+            <img src="res/img/toolbox.png" style="width: 50px; height: 50px;">
+          </div>
+        </div>
+        <div class="menu" id="money-menu">
+          <span id="money">$1.00</span>
+        </div>
+      </div>
+
+      <div class="bean"></div>
+
+
+      <div class="wrapper" id="left">
+        <div id="inventoryTooltip"></div>
+        <div class="menu" id="inventory" style="display: none;">
+            <div id="carrotSeeds-wrapper" class="inventoryWrapper" data-tooltip="<b>Carrot seeds</b><hr/>Used to plant carrots">
+              <img src="res/img/carrotSeeds.png" class="inventoryImg" onclick="select(carrotSeeds)"><span class='amount' id="carrotSeeds">25</span>
+            </div>
+            <div id="carrot-wrapper" class="inventoryWrapper">
+              <img src="res/img/carrot.png" class="inventoryImg" onclick="select(carrot)"><span class='amount' id="carrots">0</span>
+            </div>
+
+            
+        </div>
+      </div>
+      <div class="wrapper" id="right"></div>
+
+
+      <div class="wrapper" id="bottom">
+        <img src="res/img/sell.png" id="sell" style="width: 75px;" onclick="openSellMenu()">
+
+        <div class="menu" id="sell-menu" onclick="sell()">
+          <div style="font-size: 24px; margin-left: 20px; margin-top: 18px;" id="sell-text">SELL ITEMS</div>
+        </div>
+      </div>
+
+
+      <div id="farm">
+        <div class="farmland" style="margin-left: calc(60% - 300px); margin-top: calc(45% - 350px);">
+          <div class="row">
+            <div class="soil-block" onclick='plant(event); grow(event); harvest(event)'>
+              <span class="tooltip" onclick="event.stopPropagation();"><div style="opacity: 0%;">Carrot</div>
+                <div class="progressBar" style="display: none;"><div class="progress"></div></div>
+                <div style="display: none;">Click to harvest</div>
+              </span>
+            </div>
+            <div class="soil-block" data-veg="" onclick='plant(event); grow(event); harvest(event)'>
+              <span class="tooltip" onclick="event.stopPropagation();"><div style="opacity: 0%;">Carrot</div>
+                <div class="progressBar" style="display: none;"><div class="progress"></div></div>
+                <div style="display: none;">Click to harvest</div>
+              </span>
+            </div>
+            <div class="soil-block" onclick='plant(event); grow(event); harvest(event)'>
+              <span class="tooltip" onclick="event.stopPropagation();"><div style="opacity: 0%;">Carrot</div>
+                <div class="progressBar" style="display: none;"><div class="progress"></div></div>
+                <div style="display: none;">Click to harvest</div>
+              </span>
+            </div>
+            <div class="soil-block" onclick='plant(event); grow(event); harvest(event)'>
+              <span class="tooltip" onclick="event.stopPropagation();"><div style="opacity: 0%;">Carrot</div>
+                <div class="progressBar" style="display: none;"><div class="progress"></div></div>
+                <div style="display: none;">Click to harvest</div>
+              </span>
+            </div>
+            <div class="soil-block" onclick='plant(event); grow(event); harvest(event)'>
+              <span class="tooltip" onclick="event.stopPropagation();"><div style="opacity: 0%;">Carrot</div>
+                <div class="progressBar" style="display: none;"><div class="progress"></div></div>
+                <div style="display: none;">Click to harvest</div>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="mobile">
+      <center>
+        <p style="margin-top: 45%;">Mobile version coming soon!</p>
+      </center>
+    </div>
+    <noscript id="nojs">
+      <p style="margin-top: 45%;">This game requires JavaScript to run.</p>
+      <p>Enable JavaScript to play.</p>
+    </noscript>
+    <script src="src/main.js"></script> 
+  </body>
+</html>
