@@ -6,8 +6,14 @@
     <link rel="icon" href="res/img/favicon.png">
   </head>
   <body>
+    <div id="title">
+      <div style="display: flex;justify-content: center;"><img id="title-image" src="res/img/veg/carrot.png"></div>
+      <div id="title-text">Carrot Clicker</div>
+      <div id="subtitle">Simple farming simulator by Evan and friends</div>
+      <div style="display: flex;justify-content: center;"><button onclick="start();" id="playBtn">PLAY</button></div>
+    </div>
     <!--<div id="jackson">jackson</div><!-->
-    <div id="game">
+    <div id="game" style="display: none;">
 
 
       <div class="wrapper" id="top">
@@ -99,6 +105,8 @@
       <p style="margin-top: 45%;">This game requires JavaScript to run.</p>
       <p>Enable JavaScript to play.</p>
     </noscript>
+    <script src="src/data.js"></script> 
     <script src="src/main.js"></script> 
+    <script src="src/farm.js"></script> 
   </body>
 </html>

@@ -6,6 +6,9 @@ A relaxing and simplistic idle farming game.
 
 ## Updates
 
+### 0.0.5[4/24/25]
+idek why i did two updates in a single day instead of just doing one big one
+
 ### 0.0.4[4/24/25]
 Shopping and selling (still very unfinished but whatever)
 
