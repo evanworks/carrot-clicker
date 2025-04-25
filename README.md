@@ -6,6 +6,9 @@ A relaxing and simplistic idle farming game.
 
 ## Updates
 
+### 0.0.4[4/24/25]
+Shopping and selling (still very unfinished but whatever)
+
 ### 0.0.3[4/23/25]
 Code refactoring to make it OOP, inventory rewrite
 

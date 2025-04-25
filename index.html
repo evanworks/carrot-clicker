@@ -20,9 +20,12 @@
           <div class="wrapper" id="toolbox" onclick="toggle('inventory');">
             <img src="res/img/toolbox.png" style="width: 50px; height: 50px;">
           </div>
+          <div class="wrapper" id="cart" onclick="toggle('shop');">
+            <img src="res/img/cart.png" style="width: 50px;">
+          </div>
         </div>
         <div class="menu" id="money-menu">
-          <span id="money">$1.00</span>
+          <span id="money"></span>
         </div>
       </div>
 
@@ -32,17 +35,13 @@
       <div class="wrapper" id="left">
         <div id="inventoryTooltip"></div>
         <div class="menu" id="inventory" style="display: none;">
-            <div id="carrotSeeds-wrapper" class="inventoryWrapper" data-tooltip="<b>Carrot seeds</b><hr/>Used to plant carrots">
-              <img src="res/img/carrotSeeds.png" class="inventoryImg" onclick="select(carrotSeeds)"><span class='amount' id="carrotSeeds">25</span>
-            </div>
-            <div id="carrot-wrapper" class="inventoryWrapper">
-              <img src="res/img/carrot.png" class="inventoryImg" onclick="select(carrot)"><span class='amount' id="carrots">0</span>
-            </div>
 
-            
         </div>
       </div>
-      <div class="wrapper" id="right"></div>
+      <div class="wrapper" id="right">
+        <div id="shopTooltip"></div>
+        <div class="menu" id="shop" style="display: none;">a</div>
+      </div>
 
 
       <div class="wrapper" id="bottom">
@@ -63,7 +62,7 @@
                 <div style="display: none;">Click to harvest</div>
               </span>
             </div>
-            <div class="soil-block" data-veg="" onclick='plant(event); grow(event); harvest(event)'>
+            <div class="soil-block" onclick='plant(event); grow(event); harvest(event)'>
               <span class="tooltip" onclick="event.stopPropagation();"><div style="opacity: 0%;">Carrot</div>
                 <div class="progressBar" style="display: none;"><div class="progress"></div></div>
                 <div style="display: none;">Click to harvest</div>
