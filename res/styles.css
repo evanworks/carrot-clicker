@@ -5,6 +5,7 @@
 }
 body {
   user-select: none;
+  background: #59c135;
 }
 /* menus */
 .wrapper {
@@ -169,13 +170,14 @@ body {
 }
 
 .amount {
-  color: white;
-  text-shadow: 2px 2px black;
+  color: black;
+  text-shadow: -1px -1px 1px white;
   position: relative;
   left: -20px;
   top: -5px;
   font-size: 18px;
   pointer-events: none;
+  font-weight: 700;
 }
 .inventoryWrapper {
   display: inline-block;
@@ -212,7 +214,7 @@ body {
 }
 
 #toolbox img:hover {
-  content:url('img/toolbox-hover.png'); 
+  opacity: 0.7;
 }
 #toolbox img:active {
   transform: scale(0.99);
@@ -222,7 +224,7 @@ body {
   left: 260px;
 }
 #cart img:hover {
-  content:url('img/cart-hover.png'); 
+  opacity: 0.7;
 }
 #cart img:active {
   transform: scale(0.99);
@@ -237,7 +239,6 @@ body {
   z-index: -1;
   width: 100%;
   height: 100%;
-  background: #59c135;
 }
 .farmland {
   z-index: 10;

@@ -18,7 +18,7 @@ const carrot = {
   growthTime: 20,
 }
 
-let carrotSeedsAmount = 10; 
+let carrotSeedsAmount = 25; 
 const carrotSeeds = {
   get correspondingItem() {return carrotSeedsAmount;},
   set correspondingItem(val) {carrotSeedsAmount = val;},
@@ -50,5 +50,28 @@ const wateringCan = {
   price: 5,
 }
 
+let properyExpansionAmount = 0;
+const propertyExpansion = {
+  get correspondingItem() {return properyExpansionAmount;},
+  set correspondingItem(val) {properyExpansionAmount = val;},
+
+  file: 'propertyExpansion',
+  name: 'Property Expansion',
+  desc: 'Expand your farm by five slots.',
+  img: 'abnormal/propertyExpansion.png',
+  //cursor: 'can/canCursor.png',
+
+  nostack: true,
+
+  type: 'abnormal',
+  price: 30,
+
+  func: () => {
+    for (let i = 0; i < 5; i++) {
+      summonFarmland("farmland")
+    }
+  }
+}
+
 let inventoryList = [wateringCan, carrot, carrotSeeds];
-let shopList = [carrotSeeds];
+let shopList = [carrotSeeds, propertyExpansion];

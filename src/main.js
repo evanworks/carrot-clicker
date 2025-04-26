@@ -1,10 +1,18 @@
-let money = 0;
+let money = 120;
 
-selectedItem = "cursor";
+let selectedItem = "cursor";
+let farmNum = 0;
 
 function start() {
   document.getElementById("title").style.display = "none";
   document.getElementById("game").style.display = "block";
+
+  loadInventory()
+  loadShop()
+
+  for (let i = 0; i < 5; i++) {
+    summonFarmland("farmland")
+  }
 }
 
 // SELLING
@@ -45,6 +53,11 @@ function buy(item) {
   if (money >= item.price) {
     item.correspondingItem += 1;
     money -= item.price;
+
+    if (item.type == 'abnormal') {
+      item.func();
+    }
+
     loadInventory();
   }
 }
@@ -57,11 +70,15 @@ function loadInventory() {
 
     let maybe;
     if(!item.nostack) maybe = item.correspondingItem;
-    else maybe = '';
+    else maybe = '';  
+
+    let maybePrice;
+    if (!item.nostack) maybePrice = "Price: <span style='color:orange;'>$" + item.price + "</span>";
+    else maybePrice = '';
 
     if (item.correspondingItem > 0 || item.nostack) {
       inventory.innerHTML += `
-      <div id="`+item.file+`-wrapper" class="inventoryWrapper" data-tooltip="<b>`+item.name+`</b><hr/>`+item.desc+`<br/>Price: <span style='color:orange;'>$`+item.price+`</span>">
+      <div id="`+item.file+`-wrapper" class="inventoryWrapper" data-tooltip="<b>`+item.name+`</b><hr/>`+item.desc+`<br/>`+maybePrice+`">
         <img src="res/img/`+item.img+`" class="inventoryImg" onclick="select(`+item.file+`)"><span class='amount' id="`+item.file+`">`+maybe+`</span>
       </div>
       `;
@@ -88,14 +105,12 @@ function loadShop() {
   const shop = document.getElementById("shop");
   shop.innerHTML = "";
   for (i in shopList) {
-    let item = shopList[i];
-    if (item.correspondingItem > 0) {
-      shop.innerHTML += `
-      <div id="`+item.file+`-wrapper" class="inventoryWrapper" data-tooltip="<b>`+item.name+`</b><hr/>`+item.desc+`<br/>Click to buy.">
-        <img src="res/img/`+item.img+`" class="inventoryImg" onclick="buy(`+item.file+`)"><span class='amount' style='text-shadow: 2px 2px black'>$`+item.price+`</span>
-      </div>
-      `;
-    }
+  let item = shopList[i];
+    shop.innerHTML += `
+    <div id="`+item.file+`-wrapper" class="inventoryWrapper" data-tooltip="<b>`+item.name+`</b><hr/>`+item.desc+`<br/>Click to buy.">
+      <img src="res/img/`+item.img+`" class="inventoryImg" onclick="buy(`+item.file+`)"><span class='amount'>$`+item.price+`</span>
+    </div>
+    `;
   }
   document.addEventListener('mousemove', e => {
     document.getElementById("inventoryTooltip").style.left = e.clientX + 'px'
@@ -114,9 +129,6 @@ function loadShop() {
     })
   })
 }
-
-loadInventory()
-loadShop()
 
 function update() {
   document.getElementById("money").innerHTML = "$"+money.toFixed(2);
