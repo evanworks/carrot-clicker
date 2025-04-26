@@ -86,25 +86,49 @@ body {
   position: fixed;
   bottom: 11px;
   right: 12px;
-  width: 75px;
+  width: 125px;
   z-index: 100;
   /*width: 169px;
   height: 92px;*/
 }
 #sell:hover {
-  transform: scale(0.95);
-  content: url('img/sell-hover.png');  
+  /*transform: scale(0.95);*/
+  content: url('img/boxOpen.png');  
+}
+#sell:hover ~ #notSell {
+  display: block;
 }
 #sell:active {
   transform: scale(0.9, 0.9)
 }
-#sell-menu {
+#sell:active ~ #notSell {
+  display: none;
+}
+#notSell {
+  pointer-events: none;
   position: fixed;
-  height: 70px;
-  width: 300px;
-  bottom: 10px;
-  right: 10px;
-  border-radius: 50px;
+  bottom: 11px;
+  right: 12px;
+  width: 125px;
+  z-index: 102;
+  display: none;
+}
+#itemGoingInBox {
+  width: 50px;
+  position: fixed;
+  bottom: 110px;
+  right: 45px;
+
+  z-index: 101;
+  pointer-events: none;
+  animation: whee 0.5s infinite;
+
+  display: none;
+}
+@keyframes whee {
+  100% {
+    bottom: 40px;
+  }
 }
 #money-menu {
   position: fixed;
@@ -227,7 +251,7 @@ body {
   height: 50px;
   margin-right: 10px;
   margin-bottom: 10px;
-  background: #8e5252;
+  background: #76552B;
   background-size: 50px 50px;
 }
 .soil-block:active {
@@ -324,6 +348,7 @@ body {
   text-align: center;
   font-size: 64px;
   text-shadow: 0px 2px black;
+  animation: lookcommaJuice 2s infinite;
 }
 #subtitle {
   text-align: center;
@@ -332,17 +357,58 @@ body {
   text-align: center;
   width: 100px;
   margin-top: 10%;
+  animation: spin 3s infinite linear;
+}
+@keyframes spin {
+  100% { transform: rotate(360deg); }
 }
 #playBtn {
   margin-top: 2em;
   padding: 8px 24px;
   border: none;
-  background: #8E5252;
+  background: #76552B;
   color: white;
   font-size: 18px;
-  border-bottom: 4px solid #5B3138;
+  border-bottom: 4px solid #402905;
 }
 #playBtn:active {
   border-bottom: none;
   margin-top: calc(2em + 4px);
+}
+@keyframes lookcommaJuice {
+  0% {
+    top: -4px;
+    position: relative;
+  }
+  50% {
+    top: 0px;
+  }
+  100% {
+    top: -4px;
+    position: relative;
+  }
+}
+.can {
+  cursor: url('img/can/pourCursor.png'), auto !important;
+}
+
+.trail {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #00bfff;
+  border-radius: 50%;
+  opacity: 0.7;
+  pointer-events: none;
+  animation: droplet 0.5s forwards;
+}
+@keyframes droplet {
+  0% {
+    opacity: 1;
+    transform: translateY(25px) translateX(2px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(50px) translateX(2px);
+  }
 }

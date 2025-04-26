@@ -3,6 +3,8 @@ const carrot = {
   get correspondingItem() {return carrotAmount;},
   set correspondingItem(val) {carrotAmount = val;},
 
+  get seedType() {return carrotSeeds;},
+
   file: 'carrot',
   name: 'Carrot',
   desc: 'Light and juicy.',
@@ -27,12 +29,26 @@ const carrotSeeds = {
   name: 'Carrot Seeds',
   desc: 'Used to plant carrots.',
   img: 'seed/carrotSeeds.png',
-  dirt: 'soil/soilCarrot.png',
+  dirt: 'soil/dry/carrot.png',
+  wetDirt: 'soil/wet/carrot.png',
   cursor: 'cursors/carrotSeeds-cursor.png',
 
   type: 'seed',
   price: 5,
 }
 
-const inventoryList = [carrot, carrotSeeds];
+const wateringCan = {
+  file: 'wateringCan',
+  name: 'Watering Can',
+  desc: 'Douse crops to help them grow',
+  img: 'can/wateringCan.png',
+  cursor: 'can/canCursor.png',
+
+  nostack: true,
+
+  type: 'can',
+  price: 5,
+}
+
+let inventoryList = [wateringCan, carrot, carrotSeeds];
 let shopList = [carrotSeeds];

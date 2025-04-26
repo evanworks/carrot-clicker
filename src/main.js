@@ -20,7 +20,11 @@ function openSellMenu() {
 }
 
 function sell() {
-  if (selectedItem != "cursor") {
+  if (!selectedItem.nostack) {
+    if (selectedItem == "cursor") return;
+    document.getElementById("itemGoingInBox").src = "res/img/" + selectedItem.img;
+    document.getElementById("itemGoingInBox").style.display = "block";
+
     selectedItem.correspondingItem -= 1;
     money += selectedItem.price;
     if (selectedItem.correspondingItem <= 0) {
@@ -28,35 +32,15 @@ function sell() {
       document.body.style.cursor = 'auto';
     }
     loadInventory();
+
+    setTimeout(() => {
+      document.getElementById("itemGoingInBox").style.display = "none";
+    }, 500)
   }
   loadInventory();
 }
 
 // MENUS
-
-function toggle(...menuIDs) {
-  for (let menuID of menuIDs) {
-    let menu = document.getElementById(menuID)
-    if (menu.style.display == "block") {
-      menu.classList.add("goAwayNow");
-      setTimeout(() => {
-        menu.style.display = "none";
-        menu.classList.remove("goAwayNow");
-      }, 200)
-    } else {
-      menu.style.display = "block";
-    }
-  }
-}
-
-// SELECT
-
-function select(item) {
-  if (item.correspondingItem > 0) {
-    document.body.style.cursor = 'url("res/img/'+item.cursor+'"),auto';
-    selectedItem = item;
-  }
-}
 function buy(item) {
   if (money >= item.price) {
     item.correspondingItem += 1;
@@ -70,10 +54,15 @@ function loadInventory() {
   inventory.innerHTML = "";
   for (i in inventoryList) {
     let item = inventoryList[i];
-    if (item.correspondingItem > 0) {
+
+    let maybe;
+    if(!item.nostack) maybe = item.correspondingItem;
+    else maybe = '';
+
+    if (item.correspondingItem > 0 || item.nostack) {
       inventory.innerHTML += `
       <div id="`+item.file+`-wrapper" class="inventoryWrapper" data-tooltip="<b>`+item.name+`</b><hr/>`+item.desc+`<br/>Price: <span style='color:orange;'>$`+item.price+`</span>">
-        <img src="res/img/`+item.img+`" class="inventoryImg" onclick="select(`+item.file+`)"><span class='amount' id="`+item.file+`">`+item.correspondingItem+`</span>
+        <img src="res/img/`+item.img+`" class="inventoryImg" onclick="select(`+item.file+`)"><span class='amount' id="`+item.file+`">`+maybe+`</span>
       </div>
       `;
     }
@@ -103,7 +92,7 @@ function loadShop() {
     if (item.correspondingItem > 0) {
       shop.innerHTML += `
       <div id="`+item.file+`-wrapper" class="inventoryWrapper" data-tooltip="<b>`+item.name+`</b><hr/>`+item.desc+`<br/>Click to buy.">
-        <img src="res/img/`+item.img+`" class="inventoryImg" onclick="buy(`+item.file+`)"><span class='amount' style='text-shadow: 2px 2px darkorange'>$`+item.price+`</span>
+        <img src="res/img/`+item.img+`" class="inventoryImg" onclick="buy(`+item.file+`)"><span class='amount' style='text-shadow: 2px 2px black'>$`+item.price+`</span>
       </div>
       `;
     }

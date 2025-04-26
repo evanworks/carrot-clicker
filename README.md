@@ -6,6 +6,9 @@ A relaxing and simplistic idle farming game.
 
 ## Updates
 
+### 0.0.6[4/25/25]
+Watering can, box
+
 ### 0.0.5[4/24/25]
 idek why i did two updates in a single day instead of just doing one big one
 
