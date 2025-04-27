@@ -6,6 +6,9 @@ A relaxing and simplistic idle farming game.
 
 ## Updates
 
+### 0.0.14[4/27/25]
+fixed spronkler
+
 ### 0.0.13[4/27/25]
 i hate gamedev
 

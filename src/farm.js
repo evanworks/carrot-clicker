@@ -118,7 +118,7 @@ function plantSprinkler(event) {
 
   let index = Array.from(event.target.parentNode.children).indexOf(event.target);
 
-  setTimeout(() => {
+  setInterval(() => {
     if (event.target.nextSibling) {
       waterEventless(event.target.nextSibling)
     }
