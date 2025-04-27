@@ -6,6 +6,9 @@ A relaxing and simplistic idle farming game.
 
 ## Updates
 
+### 0.0.10[4/27/25]
+version name
+
 ### 0.0.9[4/27/25]
 rasdish
 
