@@ -33,7 +33,7 @@ const radish = {
   cursor: 'cursors/radish-cursor.png',
 
   type: 'veg',
-  price: 20,
+  price: 25,
   growthTime: 120,
 }
 
@@ -103,7 +103,7 @@ const propertyExpansion = {
   nostack: true,
 
   type: 'abnormal',
-  price: 30,
+  price: 50,
 
   func: () => {
     for (let i = 0; i < 5; i++) {
@@ -112,5 +112,20 @@ const propertyExpansion = {
   }
 }
 
-let inventoryList = [wateringCan, carrot, radish, carrotSeeds, radishSeeds];
-let shopList = [carrotSeeds, radishSeeds,  propertyExpansion];
+let sprinklerAmount = 0;
+const sprinkler = {
+  get correspondingItem() {return sprinklerAmount;},
+  set correspondingItem(val) {sprinklerAmount = val;},
+
+  file: 'sprinkler',
+  name: 'Sprinkler',
+  desc: 'Water the eight nearby tiles',
+  img: 'sprinkler/sprinkler.png',
+  cursor: 'cursors/sprinkler.png',
+
+  type: 'sprinkler',
+  price: 30,
+}
+
+let inventoryList = [wateringCan, carrot, radish, carrotSeeds, radishSeeds, sprinkler];
+let shopList = [carrotSeeds, radishSeeds,  propertyExpansion, sprinkler];

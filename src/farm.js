@@ -21,7 +21,7 @@ function plant(event) {
     if (window['growing'+event.target.id]) clearInterval(window['growing'+event.target.id])
     window['growing'+event.target.id] = setInterval( function() { grow(event, veg) }, 500)
 
-    if (selectedItem.correspondingItem <= 1) {
+    if (selectedItem.correspondingItem < 1) {
       setCursor("cursor");
     }
   }
@@ -34,6 +34,15 @@ function water(event) {
     event.target.style.background = "#402905";
   } else {
     event.target.style.backgroundImage = "url(res/img/"+vegetable.seedType.wetDirt +")";
+  }
+}
+function waterEventless(elmnt) {
+  let vegetable = eval(elmnt.dataset.veg);
+  elmnt.classList.add("wet");
+  if (!elmnt.style.backgroundImage) {
+    elmnt.style.background = "#402905";
+  } else {
+    elmnt.style.backgroundImage = "url(res/img/"+vegetable.seedType.wetDirt +")";
   }
 }
 
@@ -97,6 +106,52 @@ function harvest(event) {
   clearInterval(window['growing'+event.target.id]);
 }
 
+function plantSprinkler(event) {
+  console.log(event);
+  event.target.classList.add("sprinkler");
+
+  event.target.style.removeProperty("background-image");
+  event.target.style.backgroundImage = "url(res/img/sprinkler/soilSprinkler.png)";
+
+  sprinklerAmount -= 1;
+  setCursor("cursor");
+
+  let index = Array.from(event.target.parentNode.children).indexOf(event.target);
+
+  setTimeout(() => {
+    if (event.target.nextSibling) {
+      waterEventless(event.target.nextSibling)
+    }
+    if (event.target.previousSibling) {
+      waterEventless(event.target.previousSibling)
+    }
+    if (event.target.parentElement.nextSibling) {
+      waterEventless(event.target.parentElement.nextSibling.children[index])
+
+      waterEventless(event.target.parentElement.nextSibling.children[index - 1])
+      waterEventless(event.target.parentElement.nextSibling.children[index + 1])
+    }
+    if (event.target.parentElement.previousSibling) {
+      waterEventless(event.target.parentElement.previousSibling.children[index])
+  
+      waterEventless(event.target.parentElement.previousSibling.children[index - 1])
+      waterEventless(event.target.parentElement.previousSibling.children[index + 1])
+    }
+
+    
+    
+
+  
+
+  }, 1000)
+  /*event.target.classList.add("wet");
+  if (!event.target.style.backgroundImage) {
+    event.target.style.background = "#402905";
+  } else {
+    event.target.style.backgroundImage = "url(res/img/"+vegetable.seedType.wetDirt +")";
+  }*/
+}
+
 function whatShouldThisSoilDo(event) { 
   if (event.target.classList.contains("ready")) {
     harvest(event); 
@@ -106,6 +161,8 @@ function whatShouldThisSoilDo(event) {
     plant(event); 
   } else if (selectedItem.type == 'can') {
     water(event);
+  } else if (selectedItem.type == 'sprinkler') {
+    plantSprinkler(event);
   } else {
     grow(event); 
   }

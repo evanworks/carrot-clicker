@@ -6,6 +6,12 @@ A relaxing and simplistic idle farming game.
 
 ## Updates
 
+### 0.0.12[4/27/25]
+spirnkler
+
+### 0.0.11[4/27/25]
+I am so close
+
 ### 0.0.10[4/27/25]
 version name
 
