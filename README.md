@@ -6,6 +6,9 @@ A relaxing and simplistic idle farming game.
 
 ## Updates
 
+### 0.0.8[4/27/25]
+Unsmartness + version number
+
 ### 0.0.7[4/26/25]
 Midday update - did some more stuff
 
