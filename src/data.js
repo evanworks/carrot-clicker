@@ -18,7 +18,7 @@ const carrot = {
   growthTime: 20,
 }
 
-let carrotSeedsAmount = 25; 
+let carrotSeedsAmount = 10; 
 const carrotSeeds = {
   get correspondingItem() {return carrotSeedsAmount;},
   set correspondingItem(val) {carrotSeedsAmount = val;},
