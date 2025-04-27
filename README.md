@@ -6,6 +6,9 @@ A relaxing and simplistic idle farming game.
 
 ## Updates
 
+### 0.0.9[4/27/25]
+rasdish
+
 ### 0.0.8[4/27/25]
 Unsmartness + version number
 

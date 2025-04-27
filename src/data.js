@@ -17,6 +17,25 @@ const carrot = {
   price: 7,
   growthTime: 20,
 }
+let radishAmount = 0;
+const radish = {
+  get correspondingItem() {return radishAmount;},
+  set correspondingItem(val) {radishAmount = val;},
+
+  get seedType() {return radishSeeds;},
+
+  file: 'radish',
+  name: 'Radish',
+  desc: 'Deep and peppery.',
+
+  img: 'veg/radish.png',
+  ready: 'ready/soilRadishReady.png',
+  cursor: 'cursors/radish-cursor.png',
+
+  type: 'veg',
+  price: 20,
+  growthTime: 120,
+}
 
 let carrotSeedsAmount = 10; 
 const carrotSeeds = {
@@ -36,6 +55,26 @@ const carrotSeeds = {
   type: 'seed',
   price: 5,
 }
+
+let radishSeedsAmount = 0; 
+const radishSeeds = {
+  get correspondingItem() {return radishSeedsAmount;},
+  set correspondingItem(val) {radishSeedsAmount = val;},
+
+  get correspondingVeg() {return radish;},
+
+  file: 'radishSeeds',
+  name: 'Radish Seeds',
+  desc: 'Used to plant radishes.',
+  img: 'seed/radishSeeds.png',
+  dirt: 'soil/dry/radish.png',
+  wetDirt: 'soil/wet/radish.png',
+  cursor: 'cursors/radishSeeds-cursor.png',
+
+  type: 'seed',
+  price: 15,
+}
+
 
 const wateringCan = {
   file: 'wateringCan',
@@ -73,5 +112,5 @@ const propertyExpansion = {
   }
 }
 
-let inventoryList = [wateringCan, carrot, carrotSeeds];
-let shopList = [carrotSeeds, propertyExpansion];
+let inventoryList = [wateringCan, carrot, radish, carrotSeeds, radishSeeds];
+let shopList = [carrotSeeds, radishSeeds, propertyExpansion];

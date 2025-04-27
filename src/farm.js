@@ -1,24 +1,32 @@
 let growing;
 function plant(event) {
-  let veg = selectedItem.correspondingVeg;
-  event.preventDefault();
-  event.target.style.removeProperty("background");
-  event.target.style.backgroundImage = "url(res/img/"+selectedItem.dirt+")";  
-  event.target.dataset.veg = veg.file;
-  event.target.classList.add("planted");
-  selectedItem.correspondingItem -= 1;
+  if (selectedItem.correspondingItem > 0) {
+    let veg = selectedItem.correspondingVeg;
+    event.preventDefault();
+    event.target.style.removeProperty("background");
+    event.target.style.backgroundImage = "url(res/img/"+selectedItem.dirt+")";  
+    event.target.dataset.veg = veg.file;
+    event.target.classList.add("planted");
+    selectedItem.correspondingItem -= 1;
+  
+    event.target.childNodes[1].childNodes[2].style.display = "block"; // progress bar
+    event.target.childNodes[1].childNodes[0].style.opacity = "100%"; // vegetable name
+    event.target.childNodes[1].childNodes[0].innerHTML = veg.name;
+    event.target.childNodes[1].childNodes[4].style.display = "none"; // click to harvest
+    
+  
+    loadInventory();
+  
+    // weird interval stuff idek
+    if (window['growing'+event.target.id]) clearInterval(window['growing'+event.target.id])
+    window['growing'+event.target.id] = setInterval( function() { grow(event, veg) }, 500)
 
-  event.target.childNodes[1].childNodes[2].style.display = "block"; // progress bar
-  event.target.childNodes[1].childNodes[0].style.opacity = "100%"; // vegetable name
-  event.target.childNodes[1].childNodes[4].style.display = "none"; // click to harvest
-
-  loadInventory();
-
-  // weird interval stuff idek
-  if (window['growing'+event.target.id]) clearInterval(window['growing'+event.target.id])
-  window['growing'+event.target.id] = setInterval( function() { grow(event, veg) }, 500)
+    if (selectedItem.correspondingItem <= 1) {
+      setCursor("cursor");
+    }
+  }
 }
-
+  
 function water(event) {
   let vegetable = eval(event.target.dataset.veg);
   event.target.classList.add("wet");
