@@ -1,4 +1,4 @@
-let money = 1000;
+let money = 0;
 
 let selectedItem = "cursor";
 let farmNum = 0;

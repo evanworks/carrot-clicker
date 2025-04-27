@@ -127,5 +127,5 @@ const sprinkler = {
   price: 30,
 }
 
-let inventoryList = [wateringCan, carrot, radish, carrotSeeds, radishSeeds, sprinkler];
-let shopList = [carrotSeeds, radishSeeds,  propertyExpansion, sprinkler];
+let inventoryList = [wateringCan, carrot, radish, carrotSeeds, radishSeeds, sprinkler ];
+let shopList = [carrotSeeds, radishSeeds,  propertyExpansion, sprinkler ];
