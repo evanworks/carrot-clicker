@@ -113,4 +113,4 @@ const propertyExpansion = {
 }
 
 let inventoryList = [wateringCan, carrot, radish, carrotSeeds, radishSeeds];
-let shopList = [carrotSeeds, radishSeeds, propertyExpansion];
+let shopList = [carrotSeeds, radishSeeds,  propertyExpansion];
