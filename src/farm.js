@@ -134,8 +134,9 @@ function unearthSprinkler(event) {
   if (window['spronkler'+event.target.id]) clearInterval(window['spronkler'+event.target.id]);
 
   event.target.classList.remove("sprinkler");
-
   event.target.style.removeProperty("background-image");
+
+  sprinklerAmount += 1;
 }
 
 function waterEventless(elmnt) {
