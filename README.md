@@ -6,6 +6,14 @@ A relaxing and simplistic idle farming game.
 
 ## Updates
 
+### 0.0.15[4/28/25]
+
+* Actually fixed sprinkler (it was a misplaced exclamation mark)
+* Also made it less massive
+* Fixed height of shop
+* added fertiliser for some reason
+
+
 ### 0.0.14[4/27/25]
 fixed spronkler
 

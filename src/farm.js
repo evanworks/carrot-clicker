@@ -36,15 +36,6 @@ function water(event) {
     event.target.style.backgroundImage = "url(res/img/"+vegetable.seedType.wetDirt +")";
   }
 }
-function waterEventless(elmnt) {
-  let vegetable = eval(elmnt.dataset.veg);
-  elmnt.classList.add("wet");
-  if (!elmnt.style.backgroundImage) {
-    elmnt.style.background = "#402905";
-  } else {
-    elmnt.style.backgroundImage = "url(res/img/"+vegetable.seedType.wetDirt +")";
-  }
-}
 
 function grow(event) {
   console.log("growing...");
@@ -118,7 +109,7 @@ function plantSprinkler(event) {
 
   let index = Array.from(event.target.parentNode.children).indexOf(event.target);
 
-  setInterval(() => {
+  window["spronkler" + event.target.id] = setInterval(() => {
     if (event.target.nextSibling) {
       waterEventless(event.target.nextSibling)
     }
@@ -137,32 +128,43 @@ function plantSprinkler(event) {
       waterEventless(event.target.parentElement.previousSibling.children[index - 1])
       waterEventless(event.target.parentElement.previousSibling.children[index + 1])
     }
-
-    
-    
-
-  
-
   }, 1000)
-  /*event.target.classList.add("wet");
-  if (!event.target.style.backgroundImage) {
-    event.target.style.background = "#402905";
-  } else {
-    event.target.style.backgroundImage = "url(res/img/"+vegetable.seedType.wetDirt +")";
-  }*/
 }
+function unearthSprinkler(event) {
+  if (window['spronkler'+event.target.id]) clearInterval(window['spronkler'+event.target.id]);
+
+  event.target.classList.remove("sprinkler");
+
+  event.target.style.removeProperty("background-image");
+}
+
+function waterEventless(elmnt) {
+  if (elmnt) {
+    if (elmnt.classList.contains("wet")) return;
+    let vegetable = eval(elmnt.dataset.veg);
+    elmnt.classList.add("wet");
+    if (!elmnt.style.backgroundImage) {
+      elmnt.style.background = "#402905";
+    } else {
+      elmnt.style.backgroundImage = "url(res/img/"+vegetable.seedType.wetDirt +")";
+    }
+  }
+}
+
 
 function whatShouldThisSoilDo(event) { 
   if (event.target.classList.contains("ready")) {
     harvest(event); 
   }
 
-  if (selectedItem.type == 'seed' && !event.target.classList.contains("planted")) {
+  if (selectedItem.type == 'seed' && !event.target.classList.contains("planted") && !event.target.classList.contains("sprinkler")) {
     plant(event); 
   } else if (selectedItem.type == 'can') {
     water(event);
   } else if (selectedItem.type == 'sprinkler') {
     plantSprinkler(event);
+  } else if (event.target.classList.contains("sprinkler")) {
+    unearthSprinkler(event);
   } else {
     grow(event); 
   }

@@ -88,6 +88,18 @@ const wateringCan = {
   type: 'can',
   price: 5,
 }
+const sprayFertilizer = {
+  file: 'sprayFertilizer',
+  name: 'Spray Fertilizer',
+  desc: 'Does not work yet!!! Stop trying. Use some probably harmful chemicals and up your plants\' growth speed.',
+  img: 'fertilizer/sprayFertilizer.png',
+  cursor: 'can/canCursor.png',
+
+  nostack: true,
+
+  type: 'fertilizer',
+  price: 20,
+}
 
 let properyExpansionAmount = 0;
 const propertyExpansion = {
@@ -128,4 +140,4 @@ const sprinkler = {
 }
 
 let inventoryList = [wateringCan, carrot, radish, carrotSeeds, radishSeeds, sprinkler ];
-let shopList = [carrotSeeds, radishSeeds,  propertyExpansion, sprinkler ];
+let shopList = [carrotSeeds, radishSeeds,  propertyExpansion, sprinkler, sprayFertilizer];
