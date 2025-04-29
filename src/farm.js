@@ -136,7 +136,7 @@ function unearthSprinkler(event) {
   event.target.classList.remove("sprinkler");
   event.target.style.removeProperty("background-image");
 
-  sprinklerAmount += 1;
+  sprinklerAmount++;
 }
 
 function waterEventless(elmnt) {
