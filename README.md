@@ -6,6 +6,10 @@ A relaxing and simplistic idle farming game.
 
 ## Updates
 
+### 0.0.16[5/1/25]
+
+weird image thing
+
 ### 0.0.15[4/28/25]
 
 * Actually fixed sprinkler (it was a misplaced exclamation mark)

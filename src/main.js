@@ -79,7 +79,7 @@ function loadInventory() {
     if (item.correspondingItem > 0 || item.nostack) {
       inventory.innerHTML += `
       <div id="`+item.file+`-wrapper" class="inventoryWrapper" data-tooltip="<b>`+item.name+`</b><hr/>`+item.desc+`<br/>`+maybePrice+`">
-        <img src="res/img/`+item.img+`" class="inventoryImg" onclick="select(`+item.file+`)"><span class='amount' id="`+item.file+`">`+maybe+`</span>
+        <img src="https://raw.githubusercontent.com/evanworks/carrot-clicker/refs/heads/main/res/img/`+item.img+`" class="inventoryImg" onclick="select(`+item.file+`)"><span class='amount' id="`+item.file+`">`+maybe+`</span>
       </div>
       `;
     }

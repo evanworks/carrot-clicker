@@ -152,6 +152,19 @@ function waterEventless(elmnt) {
   }
 }
 
+function fertilize(event) {
+  let vegetable = eval(event.target.dataset.veg);
+
+  event.target.classList.add("wet");
+  if (!event.target.style.backgroundImage) {
+    event.target.style.background = "#402905";
+  } else {
+    event.target.style.border = "1px solid red";
+
+    // im tweaking out a little bit i think
+    //vegetable.fertilize(.rea).as;
+  }
+}
 
 function whatShouldThisSoilDo(event) { 
   if (event.target.classList.contains("ready")) {
@@ -162,6 +175,8 @@ function whatShouldThisSoilDo(event) {
     plant(event); 
   } else if (selectedItem.type == 'can') {
     water(event);
+  } else if (selectedItem.type == 'fertilizer') {
+    fertilize(event);
   } else if (selectedItem.type == 'sprinkler') {
     plantSprinkler(event);
   } else if (event.target.classList.contains("sprinkler")) {
