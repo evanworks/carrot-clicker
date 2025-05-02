@@ -23,7 +23,7 @@ function toggle(...menuIDs) {
 function setCursor(cursor) {
   selectedItem = cursor;
   if (cursor != "cursor") {
-    document.body.style.cursor = 'url("res/img/'+cursor.cursor+'"),auto';
+    document.body.style.cursor = 'url("https://raw.githubusercontent.com/evanworks/carrot-clicker/refs/heads/main/res/img/'+cursor.cursor+'"),auto';
   } else {
     document.body.style.cursor = 'auto';
   }
