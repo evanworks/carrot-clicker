@@ -6,6 +6,10 @@ A relaxing and simplistic idle farming game.
 
 ## Updates
 
+### 0.0.18[9/28/25]
+
+cl7cker??
+
 ### 0.0.17[9/28/25]
 
 im back : O
