@@ -1,6 +1,6 @@
 
 const state = {
-  money: 1000000,
+  money: 0,
   selectedItem: "cursor",
 }
 

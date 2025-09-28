@@ -16,7 +16,7 @@ im back : O
 
 * more sprinekelr fixes
 * refactoring
-* made plots expand radially (i totally did this and not chat gpt)
+* made plots expand radially (i totally did this and not chatgpt)
 
 ### 0.0.16[5/1/25]
 
