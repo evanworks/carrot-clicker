@@ -172,7 +172,8 @@ function fertilize(event) {
   }
 }
 
-function whatShouldThisSoilDo(event) { 
+function whatShouldThisSoilDo(event) {
+  console.log(event.target.childNodes[0].childNodes[1]);
   if (event.target.classList.contains("ready")) {
     harvest(event); 
   }
@@ -219,13 +220,12 @@ function summonFarmland() {
     activePlot.appendChild(row);
   }
 
-  row.innerHTML += `<div class="soil-block" id="${farmNum}" onclick='whatShouldThisSoilDo(event);'>
-    <span class="tooltip" onclick="event.stopPropagation();">
-      <div style="opacity: 0%;">Carrot</div>
-      <div class="progressBar" style="display: none;"><div class="progress"></div></div>
-      <div style="display: none;">Click to harvest</div>
-    </span>
-  </div>`;
+  row.innerHTML += `<div class="soil-block" id="`+farmNum+`" onclick='whatShouldThisSoilDo(event);'>
+              <span class="tooltip" onclick="event.stopPropagation();"><div style="opacity: 0%;">Carrot</div>
+                <div class="progressBar" style="display: none;"><div class="progress"></div></div>
+                <div style="display: none;">Click to harvest</div>
+              </span>
+            </div>`
 
   farmNum++;
 }
