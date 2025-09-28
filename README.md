@@ -1,10 +1,18 @@
 # Carrot Clicker
 A relaxing and simplistic idle farming game.
 
-**Play now in web** 
+**Play now in web:**  
 <a href="https://evanworks.github.io/carrot-clicker">evanworks.github.io/carrot-clicker</a>
 
 ## Updates
+
+### 0.0.17[9/28/25]
+
+im back : O
+
+* more sprinekelr fixes
+* refactoring
+* made plots expand radially (i totally did this and not chat gpt)
 
 ### 0.0.16[5/1/25]
 

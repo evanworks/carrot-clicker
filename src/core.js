@@ -1,15 +1,7 @@
-let mouseX = 0;
-let mouseY = 0;
-let mousedown = false;
-window.addEventListener('mousemove', e => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-})
-
 function toggle(...menuIDs) {
   for (let menuID of menuIDs) {
     let menu = document.getElementById(menuID)
-    if (menu.style.display == "block") {
+    if (menu.style.display === "block") {
       menu.classList.add("goAwayNow");
       setTimeout(() => {
         menu.style.display = "none";
@@ -21,8 +13,8 @@ function toggle(...menuIDs) {
   }
 }
 function setCursor(cursor) {
-  selectedItem = cursor;
-  if (cursor != "cursor") {
+  state.selectedItem = cursor;
+  if (cursor !== "cursor") {
     document.body.style.cursor = 'url("https://raw.githubusercontent.com/evanworks/carrot-clicker/refs/heads/main/res/img/'+cursor.cursor+'"),auto';
   } else {
     document.body.style.cursor = 'auto';
@@ -30,13 +22,46 @@ function setCursor(cursor) {
 }
 
 function select(item) {
-  if (item.correspondingItem > 0 || item.nostack) {
+  if (item.correspondingItem > 0) {
     setCursor(item);
   }
 }
 
+let isDragging = false;
+let offsetX, offsetY;
+
+document.getElementById("farm").addEventListener('mousedown', e => {
+  isDragging = true;
+  offsetX = e.clientX - document.getElementById("farm").offsetLeft;
+  offsetY = e.clientY - document.getElementById("farm").offsetTop;
+})
+
+document.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  document.getElementById("farm").style.left = `${e.clientX - offsetX}px`;
+  document.getElementById("farm").style.top = `${e.clientY - offsetY}px`;
+})
+
+document.addEventListener('mouseup', () => {
+  isDragging = false;
+})
+
+
+
+
+// WATERING CAN :(
+
+let mouseX = 0;
+let mouseY = 0;
+let mousedown = false;
+window.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+
 document.body.addEventListener('mousedown', () => {
-  if (selectedItem.type == "can") {
+  if (state.selectedItem.type === "can") {
     document.body.classList.add('can');
     mousedown = true;
   }
@@ -68,31 +93,11 @@ setInterval(() => {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     document.body.style.cursor = "auto";
-    selectedItem = "cursor";
+    state.selectedItem = "cursor";
   }
 });
 document.addEventListener('contextmenu', e => {
   e.preventDefault()
   document.body.style.cursor = "auto";
-  selectedItem = "cursor";
+  state.selectedItem = "cursor";
 });
-
-
-let isDragging = false
-let offsetX, offsetY
-
-document.getElementById("farm").addEventListener('mousedown', e => {
-    isDragging = true
-    offsetX = e.clientX - document.getElementById("farm").offsetLeft
-    offsetY = e.clientY - document.getElementById("farm").offsetTop
-})
-
-document.addEventListener('mousemove', e => {
-    if (!isDragging) return
-    document.getElementById("farm").style.left = `${e.clientX - offsetX}px`
-    document.getElementById("farm").style.top = `${e.clientY - offsetY}px`
-})
-
-document.addEventListener('mouseup', () => {
-    isDragging = false
-})

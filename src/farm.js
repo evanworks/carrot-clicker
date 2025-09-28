@@ -1,13 +1,13 @@
 let growing;
 function plant(event) {
-  if (selectedItem.correspondingItem > 0) {
-    let veg = selectedItem.correspondingVeg;
+  if (state.selectedItem.correspondingItem > 0) {
+    let veg = state.selectedItem.correspondingVeg;
     event.preventDefault();
     event.target.style.removeProperty("background");
-    event.target.style.backgroundImage = "url(res/img/"+selectedItem.dirt+")";  
+    event.target.style.backgroundImage = "url(res/img/"+state.selectedItem.dirt+")";
     event.target.dataset.veg = veg.file;
     event.target.classList.add("planted");
-    selectedItem.correspondingItem -= 1;
+    state.selectedItem.correspondingItem -= 1;
   
     event.target.childNodes[1].childNodes[2].style.display = "block"; // progress bar
     event.target.childNodes[1].childNodes[0].style.opacity = "100%"; // vegetable name
@@ -21,7 +21,7 @@ function plant(event) {
     if (window['growing'+event.target.id]) clearInterval(window['growing'+event.target.id])
     window['growing'+event.target.id] = setInterval( function() { grow(event, veg) }, 500)
 
-    if (selectedItem.correspondingItem < 1) {
+    if (state.selectedItem.correspondingItem < 1) {
       setCursor("cursor");
     }
   }
@@ -81,7 +81,7 @@ function harvest(event) {
   let vegetable = event.target.dataset.veg;
   vegetable = eval(vegetable);
   
-  selectedItem = "cursor";
+  state.selectedItem = "cursor";
   setCursor("cursor")
 
   event.target.style.removeProperty("background-image");
@@ -99,8 +99,11 @@ function harvest(event) {
 
 function plantSprinkler(event) {
   console.log(event);
+  event.target.classList.remove("wet");
+
   event.target.classList.add("sprinkler");
 
+  event.target.style.removeProperty("background");
   event.target.style.removeProperty("background-image");
   event.target.style.backgroundImage = "url(res/img/sprinkler/soilSprinkler.png)";
 
@@ -128,7 +131,8 @@ function plantSprinkler(event) {
       waterEventless(event.target.parentElement.previousSibling.children[index - 1])
       waterEventless(event.target.parentElement.previousSibling.children[index + 1])
     }
-  }, 1000)
+  }, 1000);
+  loadInventory();
 }
 function unearthSprinkler(event) {
   if (window['spronkler'+event.target.id]) clearInterval(window['spronkler'+event.target.id]);
@@ -137,11 +141,13 @@ function unearthSprinkler(event) {
   event.target.style.removeProperty("background-image");
 
   sprinklerAmount++;
+  loadInventory();
 }
 
 function waterEventless(elmnt) {
   if (elmnt) {
     if (elmnt.classList.contains("wet")) return;
+    if (elmnt.classList.contains("sprinkler")) return;
     let vegetable = eval(elmnt.dataset.veg);
     elmnt.classList.add("wet");
     if (!elmnt.style.backgroundImage) {
@@ -171,13 +177,13 @@ function whatShouldThisSoilDo(event) {
     harvest(event); 
   }
 
-  if (selectedItem.type == 'seed' && !event.target.classList.contains("planted") && !event.target.classList.contains("sprinkler")) {
+  if (state.selectedItem.type === 'seed' && !event.target.classList.contains("planted") && !event.target.classList.contains("sprinkler")) {
     plant(event); 
-  } else if (selectedItem.type == 'can') {
+  } else if (state.selectedItem.type === 'can') {
     water(event);
-  } else if (selectedItem.type == 'fertilizer') {
+  } else if (state.selectedItem.type === 'fertilizer') {
     fertilize(event);
-  } else if (selectedItem.type == 'sprinkler') {
+  } else if (state.selectedItem.type === 'sprinkler') {
     plantSprinkler(event);
   } else if (event.target.classList.contains("sprinkler")) {
     unearthSprinkler(event);
@@ -186,22 +192,99 @@ function whatShouldThisSoilDo(event) {
   }
 }
 
-function summonFarmland(parentId) {
-  const parent = document.getElementById(parentId)
-  let rows = parent.getElementsByClassName('row')
-  let row = rows[rows.length - 1]
+let farmPlots = new Map(); // key = "x,y", value = farmland element
+let originKey = "0,0";
+let currentPlotKey = originKey;
+
+function summonFarmland() {
+  // ensure center plot exists
+  if (!farmPlots.has(originKey)) {
+    createFarmland(0, 0);
+  }
+
+  let activePlot = farmPlots.get(currentPlotKey);
+  let rows = activePlot.getElementsByClassName('row');
+  let row = rows[rows.length - 1];
+
+  // if current plot is full, pick next spiral plot
+  if (activePlot.querySelectorAll(".soil-block").length >= 25) {
+    currentPlotKey = findNextAvailablePlot();
+    activePlot = farmPlots.get(currentPlotKey);
+    row = null;
+  }
 
   if (!row || row.children.length >= 5) {
-      row = document.createElement('div')
-      row.className = 'row'
-      parent.appendChild(row)
+    row = document.createElement('div');
+    row.className = 'row';
+    activePlot.appendChild(row);
   }
-  row.innerHTML += `<div class="soil-block" id="`+farmNum+`" onclick='whatShouldThisSoilDo(event);'>
-              <span class="tooltip" onclick="event.stopPropagation();"><div style="opacity: 0%;">Carrot</div>
-                <div class="progressBar" style="display: none;"><div class="progress"></div></div>
-                <div style="display: none;">Click to harvest</div>
-              </span>
-            </div>`
+
+  row.innerHTML += `<div class="soil-block" id="${farmNum}" onclick='whatShouldThisSoilDo(event);'>
+    <span class="tooltip" onclick="event.stopPropagation();">
+      <div style="opacity: 0%;">Carrot</div>
+      <div class="progressBar" style="display: none;"><div class="progress"></div></div>
+      <div style="display: none;">Click to harvest</div>
+    </span>
+  </div>`;
 
   farmNum++;
+}
+
+// --- helpers ---
+
+function createFarmland(x, y) {
+  const farm = document.getElementById("farm");
+  const plot = document.createElement("div");
+  plot.className = "farmland";
+  plot.dataset.x = x;
+  plot.dataset.y = y;
+
+  const gap = 350; // 350px farmland + spacing
+  plot.style.position = "absolute";
+  plot.style.left = `${window.innerWidth / 2 - 175 + x * gap}px`;
+  plot.style.top = `${window.innerHeight / 2 - 175 + y * gap}px`;
+
+  farm.appendChild(plot);
+  farmPlots.set(`${x},${y}`, plot);
+  return plot;
+}
+
+function findNextAvailablePlot() {
+  const [ox, oy] = originKey.split(",").map(Number);
+
+  for (let radius = 1; radius < 50; radius++) {
+    // Start to the RIGHT of origin
+    let x = ox + radius;
+    let y = oy - radius + 1; // just below top-right corner so first step is top edge
+
+    // right edge (top -> bottom)
+    for (; y <= oy + radius; y++) {
+      const key = `${x},${y}`;
+      if (!farmPlots.has(key)) return createFarmland(x, y), key;
+    }
+    y--; x--; // step back up, move left
+
+    // bottom edge (right -> left)
+    for (; x >= ox - radius; x--) {
+      const key = `${x},${y}`;
+      if (!farmPlots.has(key)) return createFarmland(x, y), key;
+    }
+    x++; y--; // step right, move up
+
+    // left edge (bottom -> top)
+    for (; y >= oy - radius; y--) {
+      const key = `${x},${y}`;
+      if (!farmPlots.has(key)) return createFarmland(x, y), key;
+    }
+    y++; x++; // step down, move right
+
+    // top edge (left -> right)
+    for (; x <= ox + radius; x++) {
+      const key = `${x},${y}`;
+      if (!farmPlots.has(key)) return createFarmland(x, y), key;
+    }
+    // then radius increases and we repeat
+  }
+
+  return currentPlotKey;
 }

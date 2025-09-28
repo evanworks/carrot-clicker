@@ -1,7 +1,6 @@
-let carrotAmount = 0;
 const carrot = {
-  get correspondingItem() {return carrotAmount;},
-  set correspondingItem(val) {carrotAmount = val;},
+  get correspondingItem() {return inventory.carrot;},
+  set correspondingItem(val) {inventory.carrot = val;},
 
   get seedType() {return carrotSeeds;},
 
@@ -12,15 +11,15 @@ const carrot = {
   img: 'veg/carrot.png',
   ready: 'ready/soilCarrotReady.png',
   cursor: 'cursors/carrot-cursor.png',
+  asCursor: 'accent',
 
   type: 'veg',
   price: 7,
   growthTime: 20,
 }
-let radishAmount = 0;
 const radish = {
-  get correspondingItem() {return radishAmount;},
-  set correspondingItem(val) {radishAmount = val;},
+  get correspondingItem() {return inventory.radish;},
+  set correspondingItem(val) {inventory.radish = val;},
 
   get seedType() {return radishSeeds;},
 
@@ -36,11 +35,9 @@ const radish = {
   price: 25,
   growthTime: 120,
 }
-
-let carrotSeedsAmount = 10; 
 const carrotSeeds = {
-  get correspondingItem() {return carrotSeedsAmount;},
-  set correspondingItem(val) {carrotSeedsAmount = val;},
+  get correspondingItem() {return inventory.carrotSeeds;},
+  set correspondingItem(val) {inventory.carrotSeeds = val;},
 
   get correspondingVeg() {return carrot;},
 
@@ -55,11 +52,9 @@ const carrotSeeds = {
   type: 'seed',
   price: 5,
 }
-
-let radishSeedsAmount = 0; 
 const radishSeeds = {
-  get correspondingItem() {return radishSeedsAmount;},
-  set correspondingItem(val) {radishSeedsAmount = val;},
+  get correspondingItem() {return inventory.radishSeeds;},
+  set correspondingItem(val) {inventory.radishSeeds = val;},
 
   get correspondingVeg() {return radish;},
 
@@ -74,9 +69,10 @@ const radishSeeds = {
   type: 'seed',
   price: 15,
 }
-
-
 const wateringCan = {
+  get correspondingItem() {return inventory.wateringCan;},
+  set correspondingItem(val) {inventory.wateringCan = val;},
+
   file: 'wateringCan',
   name: 'Watering Can',
   desc: 'Douse crops to help them grow',
@@ -89,9 +85,13 @@ const wateringCan = {
   price: 5,
 }
 const sprayFertilizer = {
+  //TODO don't forget this :////
+  get correspondingItem() {return inventory.wateringCan;},
+  set correspondingItem(val) {inventory.wateringCan = val;},
+
   file: 'sprayFertilizer',
   name: 'Spray Fertilizer',
-  desc: 'Does not work yet!!! Stop trying. Use some probably harmful chemicals and up your plants\' growth speed.',
+  desc: ' Use some probably harmful chemicals to further increase your plants\' growth speed.',
   img: 'fertilizer/sprayFertilizer.png',
   cursor: 'can/canCursor.png',
 
@@ -100,11 +100,9 @@ const sprayFertilizer = {
   type: 'fertilizer',
   price: 20,
 }
-
-let properyExpansionAmount = 0;
 const propertyExpansion = {
-  get correspondingItem() {return properyExpansionAmount;},
-  set correspondingItem(val) {properyExpansionAmount = val;},
+  get correspondingItem() {return inventory.propertyExpansion;},
+  set correspondingItem(val) {inventory.propertyExpansion = val;},
 
   file: 'propertyExpansion',
   name: 'Property Expansion',
@@ -113,6 +111,7 @@ const propertyExpansion = {
   //cursor: 'can/canCursor.png',
 
   nostack: true,
+  hidden: true,
 
   type: 'abnormal',
   price: 50,
@@ -137,6 +136,16 @@ const sprinkler = {
 
   type: 'sprinkler',
   price: 30,
+}
+
+const inventory = {
+  wateringCan: 1,
+  carrot: 0,
+  radish: 0,
+  carrotSeeds: 10,
+  radishSeeds: 0,
+  propertyExpansion: 1,
+  sprinkler: 0,
 }
 
 let inventoryList = [wateringCan, carrot, radish, carrotSeeds, radishSeeds, sprinkler ];

@@ -1,7 +1,11 @@
-let money = 0;
 
-let selectedItem = "cursor";
-let farmNum = 0;
+const state = {
+  money: 1000000,
+  selectedItem: "cursor",
+}
+
+let plots = [];
+let farmNum = 0; // idk really what this does but it seems important so im keeping it???
 
 function start() {
   document.getElementById("title").style.display = "none";
@@ -17,26 +21,16 @@ function start() {
 
 // SELLING
 
-function openSellMenu() {
-  sell = document.getElementById("sell-menu");
-  console.log(sell)
-  if (sell.style.display == "none") {
-    sell.style.display = "block";
-  } else {
-    sell.style.display = "none";
-  }
-}
-
 function sell() {
-  if (!selectedItem.nostack) {
-    if (selectedItem == "cursor") return;
-    document.getElementById("itemGoingInBox").src = "res/img/" + selectedItem.img;
+  if (!state.selectedItem.nostack) {
+    if (state.selectedItem === "cursor") return;
+    document.getElementById("itemGoingInBox").src = "res/img/" + state.selectedItem.img;
     document.getElementById("itemGoingInBox").style.display = "block";
 
-    selectedItem.correspondingItem -= 1;
-    money += selectedItem.price;
-    if (selectedItem.correspondingItem <= 0) {
-      selectedItem = "cursor";
+    state.selectedItem.correspondingItem -= 1;
+    state.money += state.selectedItem.price;
+    if (state.selectedItem.correspondingItem <= 0) {
+      state.selectedItem = "cursor";
       document.body.style.cursor = 'auto';
     }
     loadInventory();
@@ -48,89 +42,7 @@ function sell() {
   loadInventory();
 }
 
-// MENUS
-function buy(item) {
-  if (money >= item.price) {
-    item.correspondingItem += 1;
-    money -= item.price;
-
-    if (item.type == 'abnormal') {
-      item.func();
-    }
-
-    loadInventory();
-  }
-}
-
-function loadInventory() {
-  const inventory = document.getElementById("inventory");
-  inventory.innerHTML = "";
-  for (i in inventoryList) {
-    let item = inventoryList[i];
-
-    let maybe;
-    if(!item.nostack) maybe = item.correspondingItem;
-    else maybe = '';  
-
-    let maybePrice;
-    if (!item.nostack) maybePrice = "Price: <span style='color:orange;'>$" + item.price + "</span>";
-    else maybePrice = '';
-
-    if (item.correspondingItem > 0 || item.nostack) {
-      inventory.innerHTML += `
-      <div id="`+item.file+`-wrapper" class="inventoryWrapper" data-tooltip="<b>`+item.name+`</b><hr/>`+item.desc+`<br/>`+maybePrice+`">
-        <img src="https://raw.githubusercontent.com/evanworks/carrot-clicker/refs/heads/main/res/img/`+item.img+`" class="inventoryImg" onclick="select(`+item.file+`)"><span class='amount' id="`+item.file+`">`+maybe+`</span>
-      </div>
-      `;
-    }
-  }
-  document.addEventListener('mousemove', e => {
-    document.getElementById("inventoryTooltip").style.left = e.clientX + 'px'
-    document.getElementById("inventoryTooltip").style.top = e.clientY + 'px'
-  })
-  
-  document.querySelectorAll('.inventoryWrapper').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      document.getElementById("inventoryTooltip").innerHTML = el.dataset.tooltip
-      document.getElementById("inventoryTooltip").style.opacity = 1
-    })
-  
-    el.addEventListener('mouseleave', () => {
-      document.getElementById("inventoryTooltip").style.opacity = 0
-      document.getElementById("inventoryTooltip").innerHTML = ''
-    })
-  })
-}
-function loadShop() {
-  const shop = document.getElementById("shop");
-  shop.innerHTML = "";
-  for (i in shopList) {
-  let item = shopList[i];
-    shop.innerHTML += `
-    <div id="`+item.file+`-wrapper" class="inventoryWrapper" data-tooltip="<b>`+item.name+`</b><hr/>`+item.desc+`<br/>Click to buy.">
-      <img src="res/img/`+item.img+`" class="inventoryImg" onclick="buy(`+item.file+`)"><span class='amount'>$`+item.price+`</span>
-    </div>
-    `;
-  }
-  document.addEventListener('mousemove', e => {
-    document.getElementById("inventoryTooltip").style.left = e.clientX + 'px'
-    document.getElementById("inventoryTooltip").style.top = e.clientY + 'px'
-  })
-  
-  document.querySelectorAll('.inventoryWrapper').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      document.getElementById("inventoryTooltip").innerHTML = el.dataset.tooltip
-      document.getElementById("inventoryTooltip").style.opacity = 1
-    })
-  
-    el.addEventListener('mouseleave', () => {
-      document.getElementById("inventoryTooltip").style.opacity = 0
-      document.getElementById("inventoryTooltip").innerHTML = ''
-    })
-  })
-}
-
 function update() {
-  document.getElementById("money").innerHTML = "$"+money.toFixed(2);
+  document.getElementById("money").innerHTML = "$"+state.money.toFixed(2);
 }
 setInterval(update, 100)

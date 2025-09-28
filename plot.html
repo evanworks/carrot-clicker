@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>plot</title>
+    <style>
+        #farm {
+            display: grid;
+            gap: 4px;
+            justify-content: center;
+            align-items: center;
+        }
+        .plot {
+            display: inline-block;
+        }
+        .square {
+            width: 25px;
+            height: 25px;
+            background-color: grey;
+            margin-left: 1px;
+            margin-top: -4px;
+            display: inline-block;
+        }
+        .row {
+            width: 135px;
+        }
+    </style>
+</head>
+<body>
+<div id="farm"></div>
+<button onclick="summonFarmland()">Add Square</button>
+
+<script>
+  const farm = document.getElementById("farm");
+  let plots = new Map(); // key = "x,y", value = plot element
+  let currentPlotKey = "0,0";
+  plots.set(currentPlotKey, createPlotContainer(0, 0));
+  updateGridSize();
+
+  function summonFarmland() {
+    let activePlot = plots.get(currentPlotKey);
+
+    // find or create row inside active plot
+    let rows = activePlot.getElementsByClassName('row');
+    let row = rows[rows.length - 1];
+
+    // If plot full, move to next plot position
+    if (activePlot.querySelectorAll(".square").length >= 25) {
+      currentPlotKey = findNextAvailablePlot();
+      activePlot = plots.get(currentPlotKey);
+      row = null;
+    }
+
+    if (!row || row.children.length >= 5) {
+      row = document.createElement('div');
+      row.className = 'row';
+      activePlot.appendChild(row);
+    }
+
+    const square = document.createElement('div');
+    square.className = 'square';
+    row.appendChild(square);
+  }
+
+  function createPlotContainer(x, y) {
+    const plot = document.createElement("div");
+    plot.className = "plot";
+    plot.dataset.x = x;
+    plot.dataset.y = y;
+    farm.appendChild(plot);
+    plots.set(`${x},${y}`, plot);
+    updateGridSize();
+    positionPlots();
+    return plot;
+  }
+
+  function findNextAvailablePlot() {
+    const [cx, cy] = currentPlotKey.split(",").map(Number);
+
+    // clockwise directions (N, NE, E, SE, S, SW, W, NW)
+    const directions = [
+      [0, -1], [1, -1], [1, 0], [1, 1],
+      [0, 1], [-1, 1], [-1, 0], [-1, -1]
+    ];
+
+    for (const [dx, dy] of directions) {
+      const key = `${cx + dx},${cy + dy}`;
+      if (!plots.has(key)) {
+        createPlotContainer(cx + dx, cy + dy);
+        return key;
+      }
+    }
+    return currentPlotKey; // fallback
+  }
+
+  function updateGridSize() {
+    // adjust grid size to fit all plots
+    const coords = Array.from(plots.keys()).map(k => k.split(",").map(Number));
+    const minX = Math.min(...coords.map(c => c[0]));
+    const maxX = Math.max(...coords.map(c => c[0]));
+    const minY = Math.min(...coords.map(c => c[1]));
+    const maxY = Math.max(...coords.map(c => c[1]));
+
+    farm.style.gridTemplateColumns = `repeat(${maxX - minX + 1}, auto)`;
+    farm.style.gridTemplateRows = `repeat(${maxY - minY + 1}, auto)`;
+    positionPlots();
+  }
+
+  function positionPlots() {
+    // Normalize plot positions so grid fills correctly
+    const coords = Array.from(plots.keys()).map(k => k.split(",").map(Number));
+    const minX = Math.min(...coords.map(c => c[0]));
+    const minY = Math.min(...coords.map(c => c[1]));
+
+    plots.forEach((plot, key) => {
+      const [x, y] = key.split(",").map(Number);
+      plot.style.gridColumn = x - minX + 1;
+      plot.style.gridRow = y - minY + 1;
+    });
+  }
+</script>
+</body>
+</html>
