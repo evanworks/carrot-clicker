@@ -6,8 +6,11 @@ const state = {
 
 let farmNum = 0; // idk really what this does but it seems important so im keeping it???
 
-function start() {
+window.addEventListener("load", () => {
   preloadImages(images, () => {console.log("done")});
+});
+
+function start() {
   document.getElementById("title").style.display = "none";
   document.getElementById("game").style.display = "block";
 

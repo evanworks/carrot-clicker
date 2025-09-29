@@ -151,7 +151,42 @@ const inventory = {
 }
 
 const images = [
-  "res/img/abnormal/propertyExpansion.png"
+  "res/img/abnormal/propertyExpansion.png",
+
+  "res/img/can/canCursor.png",
+  "res/img/can/pour.png",
+  "res/img/can/pourCursor.png",
+  "res/img/can/wateringCan.png",
+
+  "res/img/fertilizer/sprayFertilizer.png",
+  "res/img/ready/soilCarrotReady.png",
+  "res/img/ready/soilRadishReady.png",
+
+  "res/img/seed/carrotSeeds.png",
+  "res/img/seed/radishSeeds.png",
+
+  "res/img/soil/dry/carrot.png",
+  "res/img/soil/dry/radish.png",
+
+  "res/img/soil/wet/carrot.png",
+  "res/img/soil/wet/radish.png",
+
+  "res/img/sprinkler/soilSprinkler.png",
+  "res/img/sprinkler/sprinkler.png",
+
+  "res/img/veg/carrot.png",
+  "res/img/veg/radish.png",
+
+  "res/img/betterBox.png",
+  "res/img/box.png",
+  "res/img/boxOpen.png",
+  "res/img/carrot-small.png",
+  "res/img/cart.png",
+  "res/img/cart-hover.png",
+  "res/img/clock-bg.png",
+  "res/img/favicon.png",
+  "res/img/toolbox.png",
+  "res/img/toolbox-hover.png",
 ]
 
 let inventoryList = [wateringCan, carrot, radish, carrotSeeds, radishSeeds, sprinkler ];
