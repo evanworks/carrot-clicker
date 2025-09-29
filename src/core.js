@@ -14,10 +14,22 @@ function toggle(...menuIDs) {
 }
 function setCursor(cursor) {
   state.selectedItem = cursor;
+
   if (cursor !== "cursor") {
-    document.body.style.cursor = 'url("https://raw.githubusercontent.com/evanworks/carrot-clicker/refs/heads/main/res/img/'+cursor.cursor+'"),auto';
+    if (cursor.asCursor === "accent") {
+      document.getElementById("selected-box").style.transform = "translate(10px, -25px)";
+      document.body.style.cursor = "auto";
+      document.getElementById("selected-box").src = "res/img/"+cursor.img;
+
+    } else if ( cursor.asCursor === "replace" ) {
+      document.getElementById("selected-box").style.transform = "translate(0px, 0px)";
+      document.body.style.cursor = "none";
+      document.getElementById("selected-box").src = "res/img/"+cursor.cursor;
+    }
   } else {
-    document.body.style.cursor = 'auto';
+    document.body.style.cursor = "auto";
+    document.getElementById("selected-box").src = "";
+    mousedown = false;
   }
 }
 
@@ -57,24 +69,31 @@ let mousedown = false;
 window.addEventListener('mousemove', e => {
   mouseX = e.clientX;
   mouseY = e.clientY;
+
+  document.getElementById("selected-box").style.left = `${mouseX}px`;
+  document.getElementById("selected-box").style.top = `${mouseY}px`;
 });
 
 
 document.body.addEventListener('mousedown', () => {
   if (state.selectedItem.type === "can") {
-    document.body.classList.add('can');
+    document.getElementById("selected-box").src = "res/img/"+wateringCan.pour;
     mousedown = true;
   }
 });
 
 document.body.addEventListener('mouseup', () => {
-  document.body.classList.remove('can');
-  mousedown = false;
+  if (state.selectedItem.type === "can") {
+    document.getElementById("selected-box").src = "res/img/" + wateringCan.img;
+    mousedown = false;
+  }
 });
 
 document.body.addEventListener('mouseleave', () => {
-  document.body.classList.remove('can');
-  mousedown = false;
+  if (state.selectedItem.type === "can") {
+    document.getElementById("selected-box").src = "res/img/" + wateringCan.img;
+    mousedown = false;
+  }
 });
 
 setInterval(() => {
@@ -90,14 +109,18 @@ setInterval(() => {
   }
 }, 10)
 
+
+
+// deselecting
+
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    document.body.style.cursor = "auto";
+    setCursor("cursor");
     state.selectedItem = "cursor";
   }
 });
 document.addEventListener('contextmenu', e => {
   e.preventDefault()
-  document.body.style.cursor = "auto";
+  setCursor("cursor");
   state.selectedItem = "cursor";
 });

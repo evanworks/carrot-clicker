@@ -6,6 +6,10 @@ A relaxing and simplistic idle farming game.
 
 ## Updates
 
+### 0.0.20[9/28/25]
+* made cursors look 'better?' (at least they use less images)
+* image preloading for a single image to test
+
 ### 0.0.19[9/28/25]
 
 un sneeze

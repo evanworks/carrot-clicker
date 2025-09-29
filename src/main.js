@@ -4,10 +4,10 @@ const state = {
   selectedItem: "cursor",
 }
 
-let plots = [];
 let farmNum = 0; // idk really what this does but it seems important so im keeping it???
 
 function start() {
+  preloadImages(images, () => {console.log("done")});
   document.getElementById("title").style.display = "none";
   document.getElementById("game").style.display = "block";
 
@@ -31,7 +31,7 @@ function sell() {
     state.money += state.selectedItem.price;
     if (state.selectedItem.correspondingItem <= 0) {
       state.selectedItem = "cursor";
-      document.body.style.cursor = 'auto';
+      setCursor("cursor");
     }
     loadInventory();
 
@@ -46,3 +46,22 @@ function update() {
   document.getElementById("money").innerHTML = "$"+state.money.toFixed(2);
 }
 setInterval(update, 100)
+
+
+
+function preloadImages(paths, callback) {
+  let loadedCount = 0;
+  const total = paths.length;
+
+  paths.forEach(path => {
+    const img = new Image();
+    img.src = path;
+
+    img.onload = img.onerror = () => {
+      loadedCount++;
+      if (loadedCount === total) {
+        callback(); // all images are done loading
+      }
+    };
+  });
+}

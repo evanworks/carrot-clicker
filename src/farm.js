@@ -159,8 +159,6 @@ function waterEventless(elmnt) {
 }
 
 function fertilize(event) {
-  let vegetable = eval(event.target.dataset.veg);
-
   event.target.classList.add("wet");
   if (!event.target.style.backgroundImage) {
     event.target.style.background = "#402905";
@@ -221,7 +219,7 @@ function summonFarmland() {
   }
 
   row.innerHTML += `<div class="soil-block" id="`+farmNum+`" onclick='whatShouldThisSoilDo(event);'>
-              <span class="tooltip" onclick="event.stopPropagation();"><div style="opacity: 0%;">Carrot</div>
+              <span class="tooltip" onclick="event.stopPropagation();"><div style="opacity: 0;">Carrot</div>
                 <div class="progressBar" style="display: none;"><div class="progress"></div></div>
                 <div style="display: none;">Click to harvest</div>
               </span>

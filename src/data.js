@@ -10,7 +10,6 @@ const carrot = {
 
   img: 'veg/carrot.png',
   ready: 'ready/soilCarrotReady.png',
-  cursor: 'cursors/carrot-cursor.png',
   asCursor: 'accent',
 
   type: 'veg',
@@ -29,7 +28,7 @@ const radish = {
 
   img: 'veg/radish.png',
   ready: 'ready/soilRadishReady.png',
-  cursor: 'cursors/radish-cursor.png',
+  asCursor: 'accent',
 
   type: 'veg',
   price: 25,
@@ -45,9 +44,10 @@ const carrotSeeds = {
   name: 'Carrot Seeds',
   desc: 'Used to plant carrots.',
   img: 'seed/carrotSeeds.png',
+  asCursor: 'accent',
+
   dirt: 'soil/dry/carrot.png',
   wetDirt: 'soil/wet/carrot.png',
-  cursor: 'cursors/carrotSeeds-cursor.png',
 
   type: 'seed',
   price: 5,
@@ -62,9 +62,10 @@ const radishSeeds = {
   name: 'Radish Seeds',
   desc: 'Used to plant radishes.',
   img: 'seed/radishSeeds.png',
+  asCursor: 'accent',
+
   dirt: 'soil/dry/radish.png',
   wetDirt: 'soil/wet/radish.png',
-  cursor: 'cursors/radishSeeds-cursor.png',
 
   type: 'seed',
   price: 15,
@@ -78,6 +79,8 @@ const wateringCan = {
   desc: 'Douse crops to help them grow',
   img: 'can/wateringCan.png',
   cursor: 'can/canCursor.png',
+  pour: 'can/pour.png',
+  asCursor: 'replace',
 
   nostack: true,
 
@@ -93,7 +96,7 @@ const sprayFertilizer = {
   name: 'Spray Fertilizer',
   desc: ' Use some probably harmful chemicals to further increase your plants\' growth speed.',
   img: 'fertilizer/sprayFertilizer.png',
-  cursor: 'can/canCursor.png',
+  asCursor: 'replace',
 
   nostack: true,
 
@@ -108,7 +111,6 @@ const propertyExpansion = {
   name: 'Property Expansion',
   desc: 'Expand your farm by five slots.',
   img: 'abnormal/propertyExpansion.png',
-  //cursor: 'can/canCursor.png',
 
   nostack: true,
   hidden: true,
@@ -132,7 +134,7 @@ const sprinkler = {
   name: 'Sprinkler',
   desc: 'Water the eight nearby tiles',
   img: 'sprinkler/sprinkler.png',
-  cursor: 'cursors/sprinkler.png',
+  asCursor: 'accent',
 
   type: 'sprinkler',
   price: 30,
@@ -147,6 +149,10 @@ const inventory = {
   propertyExpansion: 1,
   sprinkler: 0,
 }
+
+const images = [
+  "res/img/abnormal/propertyExpansion.png"
+]
 
 let inventoryList = [wateringCan, carrot, radish, carrotSeeds, radishSeeds, sprinkler ];
 let shopList = [carrotSeeds, radishSeeds,  propertyExpansion, sprinkler, sprayFertilizer];
