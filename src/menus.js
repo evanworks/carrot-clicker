@@ -18,37 +18,34 @@ function loadInventory() {
 
   for (let i in inventoryList) {
     let item = inventoryList[i];
-
-    let maybe;
+    if (item.correspondingItem < 1) continue;
+    let maybe = '';
     if(!item.nostack) maybe = item.correspondingItem;
-    else maybe = '';
 
-    let maybePrice;
+    let maybePrice = '';
     if (!item.nostack) maybePrice = "Price: <span style='color:orange;'>$" + item.price + "</span>";
-    else maybePrice = '';
 
     if (item.correspondingItem > 0 || item.nostack) {
       inventory.innerHTML += `
       <div id="`+item.file+`-wrapper" class="inventoryWrapper" data-tooltip="<b>`+item.name+`</b><hr/>`+item.desc+`<br/>`+maybePrice+`">
-        <img alt="`+item.name+`" src="https://raw.githubusercontent.com/evanworks/carrot-clicker/refs/heads/main/res/img/`+item.img+`" class="inventoryImg" onclick="select(`+item.file+`)"><span class='amount' id="`+item.file+`">`+maybe+`</span>
+        <img alt="`+item.name+`" src="res/img/`+item.img+`" class="inventoryImg" onclick="select(`+item.file+`)"><span class='amount' id="`+item.file+`">`+maybe+`</span>
       </div>
       `;
     }
   }
-  reattachListeners();
 }
 function loadShop() {
   const shop = document.getElementById("shop");
   shop.innerHTML = "";
   for (let i in shopList) {
     let item = shopList[i];
+    console.log(item)
     shop.innerHTML += `
     <div id="`+item.file+`-wrapper" class="inventoryWrapper" data-tooltip="<b>`+item.name+`</b><hr/>`+item.desc+`<br/>Click to buy.">
       <img alt="`+item.name+`" src="res/img/`+item.img+`" class="inventoryImg" onclick="buy(`+item.file+`)"><span class='amount'>$`+item.price+`</span>
     </div>
     `;
   }
-  reattachListeners();
 }
 
 // refactoring = yay
@@ -70,3 +67,19 @@ function reattachListeners() {
     });
   });
 }
+document.getElementById("inventory").addEventListener("mouseover", e => {
+  const wrapper = e.target.closest(".inventoryWrapper");
+  if (wrapper) {
+    const tooltip = document.getElementById("inventoryTooltip");
+    tooltip.innerHTML = wrapper.dataset.tooltip;
+    tooltip.style.opacity = "1";
+  }
+});
+
+document.getElementById("inventory").addEventListener("mouseout", e => {
+  if (e.target.closest(".inventoryWrapper")) {
+    const tooltip = document.getElementById("inventoryTooltip");
+    tooltip.style.opacity = "0";
+    tooltip.innerHTML = "";
+  }
+});

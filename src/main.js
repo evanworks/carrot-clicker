@@ -1,7 +1,8 @@
 
 const state = {
-  money: 0,
+  money: 10000,
   selectedItem: "cursor",
+  growingTiles: [],
 }
 
 let farmNum = 0; // idk really what this does but it seems important so im keeping it???
@@ -14,11 +15,12 @@ function start() {
   document.getElementById("title").style.display = "none";
   document.getElementById("game").style.display = "block";
 
-  loadInventory()
-  loadShop()
+  reattachListeners();
+  loadInventory();
+  loadShop();
 
   for (let i = 0; i < 5; i++) {
-    summonFarmland("farmland")
+    summonFarmland("farmland");
   }
 }
 
@@ -47,9 +49,25 @@ function sell() {
 
 function update() {
   document.getElementById("money").innerHTML = "$"+state.money.toFixed(2);
+
+  if (state.money > 1000) {
+    if (!shopList.includes(pepperSeeds)) {
+      shopList.push(pepperSeeds);
+      loadShop();
+    }
+  }
 }
 setInterval(update, 100)
 
+setInterval(() => {
+  state.growingTiles.slice().forEach(tile => {
+    const done = grow(tile);
+    if (done) {
+      // remove tile from the list when it's ready
+      state.growingTiles = state.growingTiles.filter(t => t !== tile);
+    }
+  });
+}, 500);
 
 
 function preloadImages(paths, callback) {
@@ -60,11 +78,19 @@ function preloadImages(paths, callback) {
     const img = new Image();
     img.src = path;
 
-    img.onload = img.onerror = () => {
+    img.onload = () => {
       loadedCount++;
       if (loadedCount === total) {
         callback(); // all images are done loading
       }
-    };
+    }
+
+    img.onerror = () => {
+      loadedCount++;
+      console.error(path);
+      if (loadedCount === total) {
+        callback(); // all images are done loading
+      }
+    }
   });
 }

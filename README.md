@@ -6,6 +6,17 @@ A relaxing and simplistic idle farming game.
 
 ## Updates
 
+### 0.0.21[9/28/25]
+* made images in shop properly preload (#5)
+* fixed ui using transitions on game start
+* fixed clicking near the top of the screen (#2)
+* fixed clicking on growth progress bar (#1)
+* fixed memory leak in shop (#3)
+* fixed sprinkler in inventory
+* fixed sprinkler sprinking sprunkler (#7)
+* pepers
+
+
 ### 0.0.20[9/28/25]
 * made cursors look 'better?' (at least they use less images)
 * image preloading for a single image to test

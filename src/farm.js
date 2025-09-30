@@ -13,13 +13,16 @@ function plant(event) {
     event.target.childNodes[1].childNodes[0].style.opacity = "100%"; // vegetable name
     event.target.childNodes[1].childNodes[0].innerHTML = veg.name;
     event.target.childNodes[1].childNodes[4].style.display = "none"; // click to harvest
+    event.target.childNodes[1].style.pointerEvents = "none";
     
   
     loadInventory();
   
     // weird interval stuff idek
     if (window['growing'+event.target.id]) clearInterval(window['growing'+event.target.id])
-    window['growing'+event.target.id] = setInterval( function() { grow(event, veg) }, 500)
+    //window['growing'+event.target.id] = setInterval( function() { grow(event, veg) }, 500)
+
+    state.growingTiles.push(event)
 
     if (state.selectedItem.correspondingItem < 1) {
       setCursor("cursor");
@@ -28,7 +31,7 @@ function plant(event) {
 }
   
 function water(event) {
-  let vegetable = eval(event.target.dataset.veg);
+  let vegetable = vegetables[event.target.dataset.veg];
   event.target.classList.add("wet");
   if (!event.target.style.backgroundImage) {
     event.target.style.background = "#402905";
@@ -38,10 +41,15 @@ function water(event) {
 }
 
 function grow(event) {
-  console.log("growing...");
+
   if (event.target.classList.contains("planted")) {
     let vegetable = event.target.dataset.veg;
-    vegetable = eval(vegetable);
+    vegetable = vegetables[vegetable];
+
+    // watering can stuff
+    if (event.target.classList.contains("wet") && event.target.classList.contains("planted") ) {
+      event.target.style.backgroundImage = "url(res/img/"+vegetable.seedType.wetDirt+")"
+    }
 
     // bar stuff
     let modifier = 100 / vegetable.growthTime
@@ -51,20 +59,17 @@ function grow(event) {
     let barWidth = event.target.childNodes[1].childNodes[2].childNodes[0].offsetWidth;
     if (barWidth < 96) {
       event.target.childNodes[1].childNodes[2].childNodes[0].style.width = barWidth + modifier + "px";
+      return false;
     } else {
-      harvestReady(event, vegetable)
-    }
-
-    // watering can stuff
-    if (event.target.classList.contains("wet") && event.target.classList.contains("planted") ) {
-      event.target.style.backgroundImage = "url(res/img/"+vegetable.seedType.wetDirt+")"
+      harvestReady(event, vegetable);
+      return true;
     }
   }
 }
 
 function harvestReady(event) {
   let vegetable = event.target.dataset.veg;
-  vegetable = eval(vegetable);
+  vegetable = vegetables[vegetable];
 
   event.target.style.removeProperty("background-image");
   event.target.style.backgroundImage = "url(res/img/"+vegetable.ready+")";
@@ -79,7 +84,7 @@ function harvestReady(event) {
 
 function harvest(event) {
   let vegetable = event.target.dataset.veg;
-  vegetable = eval(vegetable);
+  vegetable = vegetables[vegetable];
   
   state.selectedItem = "cursor";
   setCursor("cursor")
@@ -100,14 +105,18 @@ function harvest(event) {
 function plantSprinkler(event) {
   console.log(event);
   event.target.classList.remove("wet");
+  event.target.classList.remove("planted");
 
   event.target.classList.add("sprinkler");
+
+  event.target.childNodes[1].childNodes[2].style.display = "none"; // progress bar
+  event.target.childNodes[1].childNodes[0].style.opacity = "0%"; // vegetable name
 
   event.target.style.removeProperty("background");
   event.target.style.removeProperty("background-image");
   event.target.style.backgroundImage = "url(res/img/sprinkler/soilSprinkler.png)";
 
-  sprinklerAmount -= 1;
+  inventory.sprinkler -= 1;
   setCursor("cursor");
 
   let index = Array.from(event.target.parentNode.children).indexOf(event.target);
@@ -148,7 +157,7 @@ function waterEventless(elmnt) {
   if (elmnt) {
     if (elmnt.classList.contains("wet")) return;
     if (elmnt.classList.contains("sprinkler")) return;
-    let vegetable = eval(elmnt.dataset.veg);
+    let vegetable = vegetables[elmnt.dataset.veg];
     elmnt.classList.add("wet");
     if (!elmnt.style.backgroundImage) {
       elmnt.style.background = "#402905";

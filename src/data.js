@@ -34,6 +34,42 @@ const radish = {
   price: 25,
   growthTime: 120,
 }
+const pepper = {
+  get correspondingItem() {return inventory.pepper;},
+  set correspondingItem(val) {inventory.pepper = val;},
+
+  get seedType() {return pepperSeeds;},
+
+  file: 'pepper',
+  name: 'Pepper',
+  desc: 'The hot kind. I think.',
+
+  img: 'veg/pepper.png',
+  ready: 'ready/soilPepperReady.png',
+  asCursor: 'accent',
+
+  type: 'veg',
+  price: 150,
+  growthTime: 360,
+}
+const potato = {
+  get correspondingItem() {return inventory.pepper;},
+  set correspondingItem(val) {inventory.pepper = val;},
+
+  get seedType() {return pepperSeeds;},
+
+  file: 'pepper',
+  name: 'Pepper',
+  desc: 'A large brown oval.',
+
+  img: 'veg/pepper.png',
+  ready: 'ready/soilPepperReady.png',
+  asCursor: 'accent',
+
+  type: 'veg',
+  price: 150,
+  growthTime: 360,
+}
 const carrotSeeds = {
   get correspondingItem() {return inventory.carrotSeeds;},
   set correspondingItem(val) {inventory.carrotSeeds = val;},
@@ -70,6 +106,24 @@ const radishSeeds = {
   type: 'seed',
   price: 15,
 }
+const pepperSeeds = {
+  get correspondingItem() {return inventory.pepperSeeds;},
+  set correspondingItem(val) {inventory.pepperSeeds = val;},
+
+  get correspondingVeg() {return pepper;},
+
+  file: 'pepperSeeds',
+  name: 'Pepper Seeds',
+  desc: 'Used to plant peppers.',
+  img: 'seed/pepperSeeds.png',
+  asCursor: 'accent',
+
+  dirt: 'soil/dry/pepper.png',
+  wetDirt: 'soil/wet/pepper.png',
+
+  type: 'seed',
+  price: 100,
+}
 const wateringCan = {
   get correspondingItem() {return inventory.wateringCan;},
   set correspondingItem(val) {inventory.wateringCan = val;},
@@ -89,8 +143,8 @@ const wateringCan = {
 }
 const sprayFertilizer = {
   //TODO don't forget this :////
-  get correspondingItem() {return inventory.wateringCan;},
-  set correspondingItem(val) {inventory.wateringCan = val;},
+  get correspondingItem() {return inventory.sprayFertilizer;},
+  set correspondingItem(val) {inventory.sprayFertilizer = val;},
 
   file: 'sprayFertilizer',
   name: 'Spray Fertilizer',
@@ -125,10 +179,9 @@ const propertyExpansion = {
   }
 }
 
-let sprinklerAmount = 0;
 const sprinkler = {
-  get correspondingItem() {return sprinklerAmount;},
-  set correspondingItem(val) {sprinklerAmount = val;},
+  get correspondingItem() {return inventory.sprinkler;},
+  set correspondingItem(val) {inventory.sprinkler = val;},
 
   file: 'sprinkler',
   name: 'Sprinkler',
@@ -142,10 +195,13 @@ const sprinkler = {
 
 const inventory = {
   wateringCan: 1,
+  sprayFertilizer: 0,
   carrot: 0,
   radish: 0,
+  pepper: 0,
   carrotSeeds: 10,
   radishSeeds: 0,
+  pepperSeeds: 0,
   propertyExpansion: 1,
   sprinkler: 0,
 }
@@ -189,5 +245,7 @@ const images = [
   "res/img/toolbox-hover.png",
 ]
 
-let inventoryList = [wateringCan, carrot, radish, carrotSeeds, radishSeeds, sprinkler ];
+let vegetables = { carrot, radish }
+
+let inventoryList = [wateringCan, carrot, radish, pepper, carrotSeeds, pepperSeeds, radishSeeds, sprinkler, sprayFertilizer];
 let shopList = [carrotSeeds, radishSeeds,  propertyExpansion, sprinkler, sprayFertilizer];
