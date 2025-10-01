@@ -6,6 +6,9 @@ A relaxing and simplistic idle farming game.
 
 ## Updates
 
+### 0.0.23[9/30/25]
+* fixed the fix to peppers crashing the game
+
 ### 0.0.22[9/30/25]
 * fixed starting with $6,767,676
 * fixed peppers crashing the game

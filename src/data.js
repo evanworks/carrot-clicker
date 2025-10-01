@@ -50,7 +50,7 @@ const pepper = {
 
   type: 'veg',
   price: 150,
-  growthTime: 360,
+  growthTime: 240,
 }
 const potato = {
   get correspondingItem() {return inventory.pepper;},
