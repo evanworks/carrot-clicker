@@ -6,7 +6,11 @@ A relaxing and simplistic idle farming game.
 
 ## Updates
 
-### 0.0.21[9/28/25]
+### 0.0.22[9/30/25]
+* fixed starting with $6,767,676
+* fixed peppers crashing the game
+
+### 0.0.21[9/29/25]
 * made images in shop properly preload (#5)
 * fixed ui using transitions on game start
 * fixed clicking near the top of the screen (#2)

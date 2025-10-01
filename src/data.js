@@ -245,7 +245,7 @@ const images = [
   "res/img/toolbox-hover.png",
 ]
 
-let vegetables = { carrot, radish }
+let vegetables = { carrot, radish, pepper }
 
 let inventoryList = [wateringCan, carrot, radish, pepper, carrotSeeds, pepperSeeds, radishSeeds, sprinkler, sprayFertilizer];
 let shopList = [carrotSeeds, radishSeeds,  propertyExpansion, sprinkler, sprayFertilizer];
