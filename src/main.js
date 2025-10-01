@@ -1,6 +1,6 @@
 
 const state = {
-  money: 10000,
+  money: 0,
   selectedItem: "cursor",
   growingTiles: [],
 }

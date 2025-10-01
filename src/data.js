@@ -132,7 +132,7 @@ const wateringCan = {
   name: 'Watering Can',
   desc: 'Douse crops to help them grow',
   img: 'can/wateringCan.png',
-  cursor: 'can/canCursor.png',
+  cursor: 'can/wateringCan.png',
   pour: 'can/pour.png',
   asCursor: 'replace',
 
